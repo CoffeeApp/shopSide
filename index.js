@@ -8,9 +8,32 @@ class OrderState extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      name: '',
-      phone: '',
-      comment: ''
+      currentOrders: [
+        {
+          "order_id": 1,
+          "shop_id": 234,
+          "coffees": [
+            {
+              "type": "flat white",
+              "qty": 1,
+              "milk": "trim",
+              "sugar": 1
+            },
+            {
+              "type": "americano",
+              "qty": 2,
+              "milk": "soy",
+              "sugar": 0
+            }
+          ],
+          "details": {
+            "price": 6.00,
+            "name": "Jeremy",
+            "phone": "021 225 555",
+            "ordered": "Fri Oct 21 2016 10:39:50 GMT+1300 (NZDT)"
+          }
+        }
+      ]
     }
   }
 
@@ -18,9 +41,7 @@ class OrderState extends Component {
     orderService.on('created', (order) => {
       console.log('Someone created an order', order);
       this.setState({
-        name: order.name,
-        phone: order.phone,
-        comment: order.comment
+        currentOrders: [...this.state.currentOrders, order]
       })
     })
   }
@@ -28,7 +49,7 @@ class OrderState extends Component {
   render() {
     console.log('this.state: ', this.state);
     return (
-      <App appName='Coffee App' name= {this.state.name} phone= {this.state.phone} comment= {this.state.comment}/>
+      <App appName='Coffee App' currentOrders = {this.state.currentOrders} />
     )
   }
 }
