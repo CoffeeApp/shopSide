@@ -9,10 +9,13 @@
     "test": "browserify test/index.js | node | tap-spec",
     "dist": "mkdir -p dist && bash -c 'cp *.{js,html,css} dist'",
     "push": "gh-pages -d dist",
-    "deploy": "npm run build && npm run dist && npm run push"
+    "deploy": "npm run build && npm run dist && npm run push",
+    "webpack": "webpack-dev-server"
   },
   "browserify": {
-    "transform": ["babelify"]
+    "transform": [
+      "babelify"
+    ]
   },
   "repository": {
     "type": "git",
@@ -24,7 +27,11 @@
     "url": "https://github.com/author/coffeeAppShopSide/issues"
   },
   "homepage": "https://github.com/author/coffeeAppShopSide",
-  "dependencies": {},
+  "dependencies": {
+    "feathers-client": "^1.6.1",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.2"
+  },
   "devDependencies": {
     "babel-preset-es2015": "^6.5.0",
     "babel-preset-react": "^6.5.0",
@@ -32,8 +39,8 @@
     "browserify": "^13.0.0",
     "budo": "^8.2.0",
     "gh-pages": "^0.11.0",
-    "react": "^15.0.1", 
-    "react-dom": "^15.0.1", 
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1",
     "tap-spec": "^4.1.1",
     "tape": "^4.5.1",
     "uglifyify": "^3.0.1",

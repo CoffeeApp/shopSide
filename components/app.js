@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import Banner from './banner'
+import OrderList from './orderList'
+import api from '../api'
 
 class App extends Component {
 
@@ -7,7 +10,14 @@ class App extends Component {
   }
 
   render () {
-    return <h1>Welcome to {this.props.name}</h1>
+    console.log('this.props in app: ',this.props);
+    return (
+      <div>
+        <h1>Welcome to {this.props.appName}</h1>
+        <Banner />
+        <OrderList name={this.props.name} phone = {this.props.phone} comment = {this.props.comment}/>
+      </div>
+    )
   }
 
 }
