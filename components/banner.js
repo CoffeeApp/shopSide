@@ -7,7 +7,6 @@ class Banner extends Component {
   }
 
   render () {
-    console.log('BANNER: ', this.props);
     const {shop_id} = this.props
     return (
       <div>

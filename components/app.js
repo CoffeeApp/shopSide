@@ -11,6 +11,12 @@ class App extends Component {
 
   render () {
     console.log('this.props in app: ',this.props);
+    const orders = []
+    console.log('currentOrders: ', this.props.currentOrders);
+    Object.keys(this.props.currentOrders).map((key) => {
+      var item = this.props.currentOrders[key]
+      orders.push(item)
+    })
     return (
       <div>
         <h1>{this.props.appName}</h1>

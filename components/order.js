@@ -8,7 +8,6 @@ class Order extends Component {
   }
 
   render () {
-    console.log('I HAVE PROPS ', this.props)
     return (
       <div>
         <h1>{this.props.order.qty} {this.props.order.type}</h1>

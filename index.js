@@ -10,8 +10,9 @@ class OrderState extends Component {
     this.state = {
       currentOrders: [
         {
-          "order_id": 1,
+          "order_id": 5,
           "shop_id": "Fidel's Cafe",
+          "status": "new",
           "coffees": [
             {
               "type": "flat white",
@@ -32,11 +33,39 @@ class OrderState extends Component {
             "phone": "021 225 555",
             "ordered": "Fri Oct 21 2016 10:39:50 GMT+1300 (NZDT)"
           }
+        },
+        {
+          "order_id": 1,
+          "shop_id": "Fidel's Cafe",
+          "status": "new",
+          "coffees": [
+            {
+              "type": "flat white",
+              "qty": 1,
+              "milk": "trim",
+              "sugar": 3
+            },
+          ],
+          "details": {
+            "price": 4.00,
+            "name": "Jessica",
+            "phone": "021 121 443",
+            "ordered": "Fri Oct 21 2016 10:39:50 GMT+1300 (NZDT)"
+          }
         }
       ]
     }
   }
-
+  updateOrderStatus(id, status) {
+    var order = this.state.currentOrders.filter( (orders) => {
+      return orders.order_id === id
+    })[0]
+    if(order) {
+      this.setState({
+        order.status: status
+      })
+    }
+  }
   componentDidMount() {
     orderService.on('created', (order) => {
       console.log('Someone created an order', order);
@@ -49,7 +78,7 @@ class OrderState extends Component {
   render() {
     console.log('this.state: ', this.state);
     return (
-      <App appName='Coffee App' currentOrders = {this.state.currentOrders} />
+      <App appName='Coffee App' currentOrders = {this.state.currentOrders} updateOrderStatus = {this.updateOrderStatus}/>
     )
   }
 }

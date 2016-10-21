@@ -8,19 +8,20 @@ class OrderList extends Component {
   }
 
   render () {
+    console.log('orders array', orders);
     return (
       <div>
-      {this.props.currentOrders[0].coffees.map((order, i) => {
-        return (
-          <ul>
-            <li><Order key={i} order={order} /></li>
-          </ul>
-        )
-        })}
+        
       </div>
     )
   }
 
 }
-
+// {this.props.currentOrders[0].coffees.map((order, i) => {
+//   return (
+//     <ul key={i}>
+//       <li><Order order={order}/></li>
+//     </ul>
+//   )
+//   })}
 export default OrderList
