@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import OrderItem from './orderItem'
 
 class Order extends Component {
 
@@ -7,16 +8,15 @@ class Order extends Component {
   }
 
   render () {
-    console.log('this.props in order: ', this.props);
+    console.log('I HAVE PROPS ', this.props)
     return (
       <div>
-        {this.props.name}
-        {this.props.phone}
-        {this.props.comment}
+        <h1>{this.props.order.qty} {this.props.order.type}</h1>
+        <h2>{this.props.order.sugar} sugar</h2>
+        <h2>{this.props.order.milk} milk</h2>
       </div>
     )
   }
-
 }
 
 export default Order

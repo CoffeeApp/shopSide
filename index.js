@@ -11,7 +11,7 @@ class OrderState extends Component {
       currentOrders: [
         {
           "order_id": 1,
-          "shop_id": 234,
+          "shop_id": "Fidel's Cafe",
           "coffees": [
             {
               "type": "flat white",

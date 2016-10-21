@@ -13,9 +13,9 @@ class App extends Component {
     console.log('this.props in app: ',this.props);
     return (
       <div>
-        <h1>Welcome to {this.props.appName}</h1>
-        <Banner />
-        <OrderList name={this.props.name} phone = {this.props.phone} comment = {this.props.comment}/>
+        <h1>{this.props.appName}</h1>
+        <Banner shop_id={this.props.currentOrders[0].shop_id}/>
+        <OrderList currentOrders={this.props.currentOrders}/>
       </div>
     )
   }

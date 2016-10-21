@@ -7,9 +7,12 @@ class Banner extends Component {
   }
 
   render () {
+    console.log('BANNER: ', this.props);
+    const {shop_id} = this.props
     return (
       <div>
-        <img src="http://placekitten.com/200/300" />
+        <h1>{shop_id}</h1>
+        <p>{this.props.milk}</p>
         5 orders
       </div>
     )

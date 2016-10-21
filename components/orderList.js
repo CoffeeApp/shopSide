@@ -8,11 +8,16 @@ class OrderList extends Component {
   }
 
   render () {
-    console.log('this.props in orderList: ', this.props);
     return (
-      <ul>
-        <Order name={this.props.name} phone = {this.props.phone} comment = {this.props.comment}/>
-      </ul>
+      <div>
+      {this.props.currentOrders[0].coffees.map((order, i) => {
+        return (
+          <ul>
+            <li><Order key={i} order={order} /></li>
+          </ul>
+        )
+        })}
+      </div>
     )
   }
 
