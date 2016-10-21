@@ -1,22 +1,24 @@
 import React, { Component } from 'react'
-import OrderItem from './orderItem'
 
-class Order extends Component {
+const Order = ({coffees, status}) => {
 
-  constructor (props) {
-    super(props)
-  }
-
-  render () {
-    console.log('I HAVE PROPS ', this.props)
-    return (
-      <div>
-        <h1>{this.props.order.qty} {this.props.order.type}</h1>
-        <h2>{this.props.order.sugar} sugar</h2>
-        <h2>{this.props.order.milk} milk</h2>
-      </div>
-    )
-  }
+  console.log('I HAVE PROPS ', coffees, status)
+  return (
+    <div>
+      {
+        coffees.map((coffee, i) => {
+          const {qty, sugar, milk, type} = coffee
+          return (
+            <div key={i}>
+              <h1>{qty} {type}</h1>
+              <h2>{sugar} sugar</h2>
+              <h2>{milk} milk</h2>
+            </div>
+          )
+        })
+      }
+    </div>
+  )
 }
 
 export default Order

@@ -8,12 +8,11 @@ class Banner extends Component {
 
   render () {
     console.log('BANNER: ', this.props);
-    const {shop_id} = this.props
+    const {shop_id, number} = this.props
     return (
       <div>
         <h1>{shop_id}</h1>
-        <p>{this.props.milk}</p>
-        5 orders
+        <h2>Total orders: {number}</h2>
       </div>
     )
   }
