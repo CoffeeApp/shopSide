@@ -80,7 +80,7 @@ class App extends Component {
     return (
       <div>
         <h1>I am App</h1>
-        <Banner number={Object.keys(ordersById).length}/>
+        <Banner shop_id={ordersById[1].shop_id} number={Object.keys(ordersById).length}/>
         {map(ordersById, (order, id) => {
           return (
             <div key={id}>
