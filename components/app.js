@@ -32,7 +32,7 @@ class App extends Component {
             "price": 6.00,
             "name": "Jeremy",
             "phone": "021 225 555",
-            "ordered": "Fri Oct 21 2016 10:39:50 GMT+1300 (NZDT)"
+            "ordered": "10:39:50"
           }
         },
         2:  {
@@ -57,11 +57,13 @@ class App extends Component {
             "price": 6.00,
             "name": "Jessica",
             "phone": "021 225 555",
-            "ordered": "Fri Oct 21 2016 10:39:50 GMT+1300 (NZDT)"
+            "ordered": "11:39:50"
           }
         }
       }
     }
+    this.startOrder = this.startOrder.bind(this)
+    this.completeOrder = this.completeOrder.bind(this)
   }
 
   componentDidMount() {
@@ -75,6 +77,13 @@ class App extends Component {
     })
   }
 
+  startOrder() {
+    console.log('I am startOrder in app.js');
+  }
+  completeOrder() {
+    console.log('I am completeOrder in app.js');
+  }
+
   render () {
     const {ordersById} = this.state
     return (
@@ -84,8 +93,10 @@ class App extends Component {
         {map(ordersById, (order, id) => {
           return (
             <div key={id}>
-              <h2>{order.details.name}</h2>
-              <Order {...order} />
+              <h2>{order.details.name} {order.details.phone}</h2>
+              <h4>{order.details.ordered}</h4>
+              <Order coffees ={order.coffees} startOrder ={this.startOrder} completeOrder ={this.completeOrder}/>
+
             </div>
           )
           })}
