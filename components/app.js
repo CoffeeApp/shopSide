@@ -67,8 +67,10 @@ class App extends Component {
   componentDidMount() {
     orderService.on('created', (order) => {
       console.log('Someone created an order', order);
-      let temp = this.state
-      temp[order.order_id] = order
+      let temp = this.state.ordersById
+      console.log('temp before ', temp);
+      temp[order.name] = order
+      console.log('temp after ', temp);
       this.setState({
         ordersById: temp
       })
