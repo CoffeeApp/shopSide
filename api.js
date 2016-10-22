@@ -7,7 +7,7 @@ var api = feathers()
 .configure(feathers.hooks())
 .configure(feathers.socketio(socket));
 
-var orderService = api.service('dumb-orders');
+var orderService = api.service('orders');
 
 // orderService.on('created', function(order) {
 //   console.log('Someone created an order from api', order);

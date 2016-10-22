@@ -67,6 +67,15 @@ class App extends Component {
   }
 
   componentDidMount() {
+    orderService.find().then(orders => {
+      orders.details = {
+        "price": 6.00,
+        "name": "Jessica",
+        "phone": "021 225 555",
+        "ordered": "11:39:50"
+      }
+      console.log(orders);
+    })
     orderService.on('created', (order) => {
       console.log('Someone created an order', order);
       let temp = this.state.ordersById
