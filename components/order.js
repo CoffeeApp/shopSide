@@ -8,22 +8,22 @@ class Order extends Component {
   }
 
   handleStart(e) {
-    console.log('i pressed start: ', e)
-    this.props.startOrder()
+    console.log('i pressed start: ', e.target.id)
+    this.props.startOrder(e.target.id)
   }
 
   handleComplete(e) {
-    console.log('I pressed complete ', e)
-    this.props.completeOrder()
+    console.log('I pressed complete ', e.target.id)
+    this.props.completeOrder(e.target.id)
   }
 
   render() {
-    console.log('I HAVE PROPS ', this.props.startOrder)
+    console.log('I HAVE PROPS ', this.props.order_id)
     const {coffees} = this.props
     return (
       <div>
-        <button  onClick= {this.handleStart}>start</button>
-        <button onClick = {this.handleComplete}>complete</button>
+        <button id ={this.props.order_id} onClick= {this.handleStart}>start</button>
+        <button id ={this.props.order_id} onClick = {this.handleComplete}>complete</button>
         {
           coffees.map((coffee, i) => {
             const {qty, sugar, milk, type} = coffee

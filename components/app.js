@@ -69,19 +69,21 @@ class App extends Component {
   componentDidMount() {
     orderService.on('created', (order) => {
       console.log('Someone created an order', order);
-      let temp = this.state
-      temp[order.order_id] = order
+      let temp = this.state.ordersById
+      temp[order.name] = order
+      console.log('temp: ', temp)
       this.setState({
         ordersById: temp
       })
+      console.log('STATE --> ',this.state);
     })
   }
 
-  startOrder() {
-    console.log('I am startOrder in app.js');
+  startOrder(id) {
+    console.log('I am startOrder in app.js with id:', id);
   }
-  completeOrder() {
-    console.log('I am completeOrder in app.js');
+  completeOrder(id) {
+    console.log('I am completeOrder in app.js with id: ', id);
   }
 
   render () {
@@ -95,8 +97,7 @@ class App extends Component {
             <div key={id}>
               <h2>{order.details.name} {order.details.phone}</h2>
               <h4>{order.details.ordered}</h4>
-              <Order coffees ={order.coffees} startOrder ={this.startOrder} completeOrder ={this.completeOrder}/>
-
+              <Order order_id ={order.order_id} coffees ={order.coffees} startOrder ={this.startOrder} completeOrder ={this.completeOrder}/>
             </div>
           )
           })}
