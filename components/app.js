@@ -107,7 +107,7 @@ class App extends Component {
         {map(ordersById, (order, id) => {
             return (
               <div key={id} style={{background: 'lightblue'}}>
-                <OrderList order={order} coffees ={order.coffees} startOrder ={this.startOrder} completeOrder ={this.completeOrder} />
+                <OrderList order={order} startOrder ={this.startOrder} completeOrder ={this.completeOrder} />
               </div>
             )
           })}

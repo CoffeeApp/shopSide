@@ -9,11 +9,12 @@ class OrderList extends Component {
   render() {
     console.log("HELLO ", this.props.order)
     const order = this.props
+    console.log('This is order ', order)
     return (
       <div>
-        <h2>{order.name} {order.phone}</h2>
-        <h4>{order.ordered}</h4>
-        <Order order_id ={order.order_id} coffees ={order.coffees} startOrder ={this.props.startOrder} completeOrder ={this.props.completeOrder}/>
+        <h2>{order.order.name} {order.order.phone}</h2>
+        <h4>{order.order.ordered}</h4>
+        <Order order={order} startOrder ={this.props.startOrder} completeOrder ={this.props.completeOrder}/>
       </div>
     )
   }

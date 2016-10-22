@@ -19,17 +19,19 @@ class Order extends Component {
 
   render() {
     console.log('I HAVE PROPS ', this.props.order_id)
-    const {coffees} = this.props
+    const {order} = this.props
+    console.log('order.js ', order)
+    consoel.log('quantity ', {order.coffees.qty})
     return (
       <div style={{background: 'yellow'}}>
         <button id ={this.props.order_id} onClick= {this.handleStart}>start</button>
         <button id ={this.props.order_id} onClick = {this.handleComplete}>complete</button>
         {
           coffees.map((coffee, i) => {
-            const {qty, sugar, milk, type} = coffee
+            const {qty, sugar, milk, type} = {order.coffee}
             return (
               <div key ={i} style={{background: 'pink'}}>
-                <h1>{qty} {type}</h1>
+                <h1>{order.order.coffees.qty} {type}</h1>
                 <h2>{sugar} sugar</h2>
                 <h2>{milk} milk</h2>
               </div>
