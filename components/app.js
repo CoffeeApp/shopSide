@@ -3,7 +3,7 @@ import Banner from './banner'
 import Order from './order'
 import {api, orderService} from '../api'
 import { map } from 'lodash'
-
+import moment from 'moment'
 class App extends Component {
 
   constructor (props) {
@@ -67,6 +67,13 @@ class App extends Component {
   }
 
   componentDidMount() {
+    orderService.find().then(orders => {
+      var ordersById = orders.reduce((result, order) => {
+        result[order.order_id] = order
+        return result
+      }, {})
+      this.setState({ordersById: ordersById})
+    })
     orderService.on('created', (order) => {
       console.log('Someone created an order', order);
       let temp = this.state.ordersById
@@ -77,6 +84,10 @@ class App extends Component {
       })
       console.log('STATE --> ',this.state);
     })
+    orderService.on('patched', (order) => {
+      console.log('client has received status: ', order);
+
+    })
   }
 
   startOrder(id) {
@@ -86,7 +97,10 @@ class App extends Component {
     this.setState({
       ordersById: temp
     })
-    console.log(this.state);
+    orderService.patch(id, {status: 'started'}, (err, res) => {
+      console.log('err: ', err);
+      console.log('res: ', res);
+    })
   }
   completeOrder(id) {
     console.log('I am completeOrder in app.js with id: ', id);
@@ -107,8 +121,8 @@ class App extends Component {
         {map(ordersById, (order, id) => {
           return (
             <div key={id} style={{background: 'lightblue'}}>
-              <h2>{order.details.name} {order.details.phone}</h2>
-              <h4>{order.details.ordered}</h4>
+              <h2>{order.name} {order.phone}</h2>
+              <h4>{moment(order.ordered).format('MMMM Do YYYY, h:mm:ss a')}</h4>
               <Order order_id ={order.order_id} coffees ={order.coffees} startOrder ={this.startOrder} completeOrder ={this.completeOrder}/>
             </div>
           )
