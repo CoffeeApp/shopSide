@@ -2,16 +2,18 @@ import React, { Component } from 'react'
 import Banner from './banner'
 import Order from './order'
 import {api, orderService} from '../api'
+import { map } from 'lodash'
 
 class App extends Component {
 
   constructor (props) {
     super(props)
     this.state = {
-      currentOrders: [
-        {
+      ordersById: {
+        1: {
           "order_id": 1,
           "shop_id": "Fidel's Cafe",
+          "status": 'new',
           "coffees": [
             {
               "type": "flat white",
@@ -33,9 +35,10 @@ class App extends Component {
             "ordered": "Fri Oct 21 2016 10:39:50 GMT+1300 (NZDT)"
           }
         },
-        {
+        2:  {
           "order_id": 2,
           "shop_id": "Fidel's Cafe",
+          "status": 'new',
           "coffees": [
             {
               "type": "flat white",
@@ -57,28 +60,30 @@ class App extends Component {
             "ordered": "Fri Oct 21 2016 10:39:50 GMT+1300 (NZDT)"
           }
         }
-      ]
+      }
     }
   }
 
   componentDidMount() {
     orderService.on('created', (order) => {
       console.log('Someone created an order', order);
+      let temp = this.state
+      temp[order.order_id] = order
       this.setState({
-        currentOrders: [...this.state.currentOrders, order]
+        ordersById: temp
       })
     })
   }
 
   render () {
-    const {currentOrders} = this.state
+    const {ordersById} = this.state
     return (
       <div>
         <h1>I am App</h1>
-        <Banner shop_id={currentOrders[0].shop_id} number={currentOrders.length}/>
-        {currentOrders.map((order, i) => {
+        <Banner number={Object.keys(ordersById).length}/>
+        {map(ordersById, (order, id) => {
           return (
-            <div key={i}>
+            <div key={id}>
               <h2>{order.details.name}</h2>
               <Order {...order} />
             </div>

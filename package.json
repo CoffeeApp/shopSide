@@ -29,6 +29,7 @@
   "homepage": "https://github.com/author/coffeeAppShopSide",
   "dependencies": {
     "feathers-client": "^1.6.1",
+    "lodash": "^4.16.4",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.2"
   },
