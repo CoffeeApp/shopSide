@@ -8,6 +8,7 @@ var api = feathers()
 .configure(feathers.socketio(socket));
 
 var orderService = api.service('orders');
+var shopService = api.service('shops');
 
 // orderService.on('created', function(order) {
 //   console.log('Someone created an order from api', order);
@@ -20,5 +21,6 @@ var orderService = api.service('orders');
 
 export {
   api,
-  orderService
+  orderService,
+  shopService
 }

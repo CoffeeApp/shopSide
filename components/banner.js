@@ -12,7 +12,7 @@ class Banner extends Component {
   }
 
   render () {
-    const {shop_id, number} = this.props
+    const {shop_name, number} = this.props
     return (
       <div>
       <select id="great-names" onChange={this.handleChange}>
@@ -36,7 +36,7 @@ class Banner extends Component {
           Southern Cross
         </option>
       </select>
-        <h1>{shop_id}</h1>
+        <h1>{shop_name}</h1>
         <img src="http://gaycities-listing-images-production.s3.amazonaws.com/medsq_restaurants-61116-Fidels-Cafe-1081f.jpg" />
         <h2>Total orders: {number}</h2>
       </div>

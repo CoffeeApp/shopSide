@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Banner from './banner'
 import Order from './order'
-import {api, orderService} from '../api'
+import {api, orderService, shopService} from '../api'
 import { map } from 'lodash'
 import moment from 'moment'
 class App extends Component {
@@ -17,6 +17,13 @@ class App extends Component {
 
   componentDidMount() {
     var { currentShop } = this.state
+    shopService.find().then(shopsData => {
+      var shops = shopsData.data.reduce((result, shop) => {
+        result[shop.id] = shop
+        return result
+      }, {})
+      this.setState({shops: shops})
+    })
     orderService.find({query: {notIn: 'new', shop_id: currentShop}}).then(orders => {
       var ordersById = orders.reduce((result, order) => {
         result[order.order_id] = order
@@ -24,23 +31,17 @@ class App extends Component {
       }, {})
       this.setState({ordersById: ordersById})
     })
-    orderService.on('created', (order) => {
-      console.log('Someone created an order', order);
+    
+    orderService.on('patched', (order) => {
       let temp = this.state.ordersById
-      temp[order.name] = order
-      console.log('temp: ', temp)
+      temp[order.order_id] = order
       this.setState({
         ordersById: temp
       })
-      console.log('STATE --> ',this.state);
-    })
-    orderService.on('patched', (order) => {
-      console.log('client has received status: ', order);
     })
   }
 
   changeUser(id) {
-    console.log('changed to shop : ', id);
     orderService.find({query: {notIn: 'new', shop_id: id}})
     .then(orders => {
       var ordersById = orders.reduce((result, order) => {
@@ -49,7 +50,6 @@ class App extends Component {
       }, {})
       this.setState({currentShop: id, ordersById: ordersById})
     })
-    console.log('AFTER', 'query ', id, 'shop', this.state.currentShop)
   }
 
   updateStatus(id, status) {
@@ -62,12 +62,11 @@ class App extends Component {
   }
 
   render () {
-    const {ordersById} = this.state
-    console.log('RENDER', 'shop', this.state.currentShop)
+    const {ordersById, shops, currentShop} = this.state
     if(ordersById) {
       return (
         <div>
-          <Banner  number={Object.keys(ordersById).length} changeUser={this.changeUser} shop_id={this.state.shop_id}/>
+          <Banner  number={Object.keys(ordersById).length} changeUser={this.changeUser} shop_name={shops[currentShop].name}/>
           {map(ordersById, (order, id) => {
             return (
               <div key={id} style={{background: 'lightblue'}}>
