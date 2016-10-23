@@ -92,6 +92,13 @@ class App extends Component {
 
   changeUser(user) {
     console.log('I am in app.js', user)
+    // orderService.find(user).then(orders => {
+    //   var ordersById = orders.reduce((result, order) => {
+    //     result[order.order_id] = order
+    //     return result
+    //   }, {})
+    //   this.setState({ordersById: ordersById})
+    // })
   }
 
   startOrder(id) {
@@ -126,7 +133,7 @@ class App extends Component {
             <div key={id} style={{background: 'lightblue'}}>
               <h2>{order.name} {order.phone}</h2>
               <h4>{moment(order.ordered).format('MMMM Do YYYY, h:mm:ss a')}</h4>
-              <Order order_id ={order.order_id} coffees ={order.coffees} startOrder ={this.startOrder} completeOrder ={this.completeOrder}/>
+              <Order order_id ={order.order_id} coffees ={order.coffees} status ={order.status} startOrder ={this.startOrder} completeOrder ={this.completeOrder}/>
             </div>
           )
           })}

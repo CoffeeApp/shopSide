@@ -18,12 +18,12 @@ class Order extends Component {
   }
 
   render() {
-    console.log('I HAVE PROPS ', this.props.order_id)
     const {coffees} = this.props
     return (
       <div style={{background: 'yellow'}}>
         <button id ={this.props.order_id} onClick= {this.handleStart}>start</button>
         <button id ={this.props.order_id} onClick = {this.handleComplete}>complete</button>
+        <h3>Status: {this.props.status}</h3>
         {
           coffees.map((coffee, i) => {
             const {qty, sugar, milk, type} = coffee
