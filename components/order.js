@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import OrderStatus from './orderStatus'
 
 const newClass = {
   backgroundColor: 'blue',
@@ -9,31 +10,15 @@ const newClass = {
 class Order extends Component {
   constructor(props) {
     super(props)
-    this.handleStart = this.handleStart.bind(this)
-    this.handleComplete = this.handleComplete.bind(this)
-  }
-
-  handleStart(e) {
-    console.log('i pressed start: ', e.target.id)
-    this.props.startOrder(e.target.id)
-  }
-
-  handleComplete(e) {
-    console.log('I pressed complete ', e.target.id)
-    this.props.completeOrder(e.target.id)
   }
 
   render() {
-    console.log('I HAVE PROPS ', this.props.order_id)
     const {coffees} = this.props
     return (
-        <div><hr/>
-        <button id ={this.props.order_id} className={newClass} type="button" className="btn btn-lg btn-block" onClick= {this.handleStart}>Start</button>
-
-        <button id ={this.props.order_id} className="btn btn-default btn-lg btn-block" onClick = {this.handleComplete}>In Progress</button>
-
-        <button id ={this.props.order_id} className="btn btn-default btn-lg btn-block" onClick = {this.handleComplete}>Order Completed</button>
-          {
+      <div style={{background: 'yellow'}}>
+        <OrderStatus order_id ={this.props.order_id}  status ={this.props.status} updateStatus ={this.props.updateStatus}/>
+        <h3>Status: <span>{this.props.status}</span></h3>
+        {
           coffees.map((coffee, i) => {
             const {qty, sugar, milk, type} = coffee
             return (

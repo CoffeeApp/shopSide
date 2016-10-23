@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Banner from './banner'
 import Order from './order'
-import {api, orderService} from '../api'
+import {api, orderService, shopService} from '../api'
 import { map } from 'lodash'
 import moment from 'moment'
 class App extends Component {
@@ -52,85 +52,78 @@ class App extends Component {
             }
           ]
         }
-      }
+      },
+      currentShop: 1
     }
-    this.startOrder = this.startOrder.bind(this)
-    this.completeOrder = this.completeOrder.bind(this)
+    this.updateStatus = this.updateStatus.bind(this)
+    this.changeUser = this.changeUser.bind(this)
   }
 
   componentDidMount() {
-    orderService.find().then(orders => {
+    var { currentShop } = this.state
+    shopService.find().then(shopsData => {
+      var shops = shopsData.data.reduce((result, shop) => {
+        result[shop.id] = shop
+        return result
+      }, {})
+      this.setState({shops: shops})
+    })
+    orderService.find({query: {notIn: 'new', shop_id: currentShop}}).then(orders => {
       var ordersById = orders.reduce((result, order) => {
         result[order.order_id] = order
         return result
       }, {})
       this.setState({ordersById: ordersById})
     })
-    orderService.on('created', (order) => {
-      console.log('Someone created an order', order);
+
+    orderService.on('patched', (order) => {
       let temp = this.state.ordersById
-      temp[order.name] = order
-      console.log('temp: ', temp)
+      temp[order.order_id] = order
       this.setState({
         ordersById: temp
       })
-      console.log('STATE --> ',this.state);
-    })
-    orderService.on('patched', (order) => {
-      console.log('client has received status: ', order);
-
     })
   }
 
-  startOrder(id) {
-    console.log('I am startOrder in app.js with id:', id);
-    let temp = this.state.ordersById
-    temp[id].status = 'started'
-    this.setState({
-      ordersById: temp
-    })
-    orderService.patch(id, {status: 'started'}, (err, res) => {
-      console.log('err: ', err);
-      console.log('res: ', res);
+  changeUser(id) {
+    orderService.find({query: {notIn: 'new', shop_id: id}})
+    .then(orders => {
+      var ordersById = orders.reduce((result, order) => {
+        result[order.order_id] = order
+        return result
+      }, {})
+      this.setState({currentShop: id, ordersById: ordersById})
     })
   }
-  completeOrder(id) {
-    console.log('I am completeOrder in app.js with id: ', id);
+
+  updateStatus(id, status) {
     let temp = this.state.ordersById
-    temp[id].status = 'completed'
+    temp[id].status = status
     this.setState({
       ordersById: temp
     })
-    console.log(this.state);
+    orderService.patch(id, {status: status})
   }
 
   render () {
-    const {ordersById} = this.state
-    return (
-      <div className="container-fluid">
-          <div className="row">
-            <div className="col-xs-4 col-md-4">
-        <Banner shop_id={ordersById[1].shop_id} number={Object.keys(ordersById).length}/>
+    const {ordersById, shops, currentShop} = this.state
+    if(ordersById) {
+      return (
+        <div>
+          <Banner  number={Object.keys(ordersById).length} changeUser={this.changeUser} shops={shops} currentShop={currentShop}/>
+          {map(ordersById, (order, id) => {
+            return (
+              <div key={id} style={{background: 'lightblue'}}>
+                <h2>{order.name} {order.phone}</h2>
+                <h4>{moment(order.ordered).format('MMMM Do YYYY, h:mm:ss a')}</h4>
+                <Order order_id ={order.order_id} coffees ={order.coffees} status ={order.status} updateStatus ={this.updateStatus} />
+              </div>
+            )
+            })}
         </div>
-
-        <div className="col-xs-8 col-md-8">
-        {map(ordersById, (order, id) => {
-          return (
-            <div key={id} style={{textAlign:'left',}}>
-              <h3>Customer's name: {order.name}</h3>
-              <h3>Phone number: {order.phone}</h3>
-              <h4>Time Ordered: {moment(order.ordered).format('MMMM Do YYYY, h:mm:ss a')}</h4>
-              <h4>Order Status: {order.status}</h4>
-              <hr/>
-              <Order order_id ={order.order_id} coffees ={order.coffees} startOrder ={this.startOrder} completeOrder ={this.completeOrder}/>
-              <hr/>
-            </div>
-          )
-          })}
-          </div>
-            </div>
-      </div>
-    )
+      )
+    }
+    return <div></div>
   }
 
 }
