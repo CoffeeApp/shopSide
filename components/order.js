@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
 import OrderStatus from './orderStatus'
 
+const newClass = {
+  backgroundColor: 'blue',
+  color:'red',
+
+}
+
 class Order extends Component {
   constructor(props) {
     super(props)
@@ -16,17 +22,20 @@ class Order extends Component {
           coffees.map((coffee, i) => {
             const {qty, sugar, milk, type} = coffee
             return (
-              <div key ={i} style={{background: 'pink'}}>
-                <h1>{qty} {type}</h1>
-                <h2>{sugar} sugar</h2>
-                <h2>{milk} milk</h2>
+              <div key ={i} style={{background: '#3f0000',color:'#ecf0f1',  padding:'50px',paddingLeft:'40px'}}>
+              <hr/>
+                <h3>{qty} {qty > 1 ? type + 's' : type}</h3>
+                <h3>{sugar} {sugar > 1 ? 'sugars' : 'sugar'} each</h3>
+                <h3> {qty > 1 ? 'all with' : 'with'} {milk} milk</h3>
               </div>
             )
           })
         }
       </div>
+
     )
   }
 }
+
 
 export default Order

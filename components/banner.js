@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { banner, image, currentOrders, text } from '../styles/bannerStyle'
 import { map } from 'lodash'
 
 class Banner extends Component {

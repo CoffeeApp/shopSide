@@ -9,6 +9,50 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      ordersById: {
+        1: {
+          "order_id": 1,
+          "shop_id": "Fidel's Cafe",
+          "name": "Jeremy",
+          "phone": "021 225 555",
+          "status": 'new',
+          "coffees": [
+            {
+              "type": "flat white",
+              "qty": 1,
+              "milk": "trim",
+              "sugar": 1
+            },
+            {
+              "type": "americano",
+              "qty": 2,
+              "milk": "soy",
+              "sugar": 0
+            }
+          ]
+        },
+        2:  {
+          "order_id": 2,
+          "shop_id": "Fidel's Cafe",
+          "name": "Jessica",
+          "phone": "021 225 555",
+          "status": 'new',
+          "coffees": [
+            {
+              "type": "flat white",
+              "qty": 1,
+              "milk": "trim",
+              "sugar": 1
+            },
+            {
+              "type": "americano",
+              "qty": 2,
+              "milk": "soy",
+              "sugar": 100
+            }
+          ]
+        }
+      },
       currentShop: 1
     }
     this.updateStatus = this.updateStatus.bind(this)
