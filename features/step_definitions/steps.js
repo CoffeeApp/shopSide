@@ -14,13 +14,24 @@ module.exports = function () {
     browser.setValue(`${element}[id=${id}]`, text)
   })
 
+  this.When('I click on the button with value "$string"', function (value) {
+    browser.click(`button[value="${value}"]`)
+  })
+
   this.When('I submit the form "$string"', function (formName) {
     browser.submitForm(`#${formName}`)
   })
 
+
+
   this.Then('I can see the cafe name "$string"', function (name, callback) {
     var cafeNameExists = browser.waitForExist(`h1=${name}`)
     assert.equal(cafeNameExists, true, callback)
+  })
+
+  this.Then('I can see status change to "$string"', function (name, callback) {
+    var statusNameExists = browser.waitForExist(`span=${name}`)
+    assert.equal(statusNameExists, true, callback)
   })
 
   this.Then('I can see the "$string" item "$string"', function (element, value, callback) {

@@ -1,29 +1,18 @@
 import React, { Component } from 'react'
+import OrderStatus from './orderStatus'
 
 class Order extends Component {
   constructor(props) {
     super(props)
-    this.handleStart = this.handleStart.bind(this)
-    this.handleComplete = this.handleComplete.bind(this)
-  }
-
-  handleStart(e) {
-    console.log('i pressed start: ', e.target.id)
-    this.props.startOrder(e.target.id)
-  }
-
-  handleComplete(e) {
-    console.log('I pressed complete ', e.target.id)
-    this.props.completeOrder(e.target.id)
   }
 
   render() {
     const {coffees} = this.props
+    console.log('order has props: ', this.props);
     return (
       <div style={{background: 'yellow'}}>
-        <button id ={this.props.order_id} onClick= {this.handleStart}>start</button>
-        <button id ={this.props.order_id} onClick = {this.handleComplete}>complete</button>
-        <h3>Status: {this.props.status}</h3>
+        <OrderStatus order_id ={this.props.order_id}  status ={this.props.status} updateStatus ={this.props.updateStatus}/>
+        <h3>Status: <span>{this.props.status}</span></h3>
         {
           coffees.map((coffee, i) => {
             const {qty, sugar, milk, type} = coffee

@@ -62,8 +62,7 @@ class App extends Component {
         }
       }
     }
-    this.startOrder = this.startOrder.bind(this)
-    this.completeOrder = this.completeOrder.bind(this)
+    this.updateStatus = this.updateStatus.bind(this)
   }
 
   componentDidMount() {
@@ -101,22 +100,10 @@ class App extends Component {
     // })
   }
 
-  startOrder(id) {
-    console.log('I am startOrder in app.js with id:', id);
+  updateStatus(id, status) {
+    console.log('I am in updateStatus');
     let temp = this.state.ordersById
-    temp[id].status = 'started'
-    this.setState({
-      ordersById: temp
-    })
-    orderService.patch(id, {status: 'started'}, (err, res) => {
-      console.log('err: ', err);
-      console.log('res: ', res);
-    })
-  }
-  completeOrder(id) {
-    console.log('I am completeOrder in app.js with id: ', id);
-    let temp = this.state.ordersById
-    temp[id].status = 'completed'
+    temp[id].status = status
     this.setState({
       ordersById: temp
     })
@@ -133,7 +120,7 @@ class App extends Component {
             <div key={id} style={{background: 'lightblue'}}>
               <h2>{order.name} {order.phone}</h2>
               <h4>{moment(order.ordered).format('MMMM Do YYYY, h:mm:ss a')}</h4>
-              <Order order_id ={order.order_id} coffees ={order.coffees} status ={order.status} startOrder ={this.startOrder} completeOrder ={this.completeOrder}/>
+              <Order order_id ={order.order_id} coffees ={order.coffees} status ={order.status} updateStatus ={this.updateStatus} />
             </div>
           )
           })}
