@@ -77,6 +77,10 @@ class App extends Component {
     })
   }
 
+  updateStatus() {
+    console.log('Update status')
+  }
+
   render () {
     const {ordersById} = this.state
     return (

@@ -13,6 +13,7 @@ const Order = ({coffees, status}) => {
               <h1>{qty} {type}</h1>
               <h2>{sugar} sugar</h2>
               <h2>{milk} milk</h2>
+              <button>Press me</button>
             </div>
           )
         })
