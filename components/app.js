@@ -14,16 +14,8 @@ class App extends Component {
     this.updateStatus = this.updateStatus.bind(this)
     this.changeUser = this.changeUser.bind(this)
   }
-
-  componentDidMount() {
+  refreshOrders() {
     var { currentShop } = this.state
-    shopService.find().then(shopsData => {
-      var shops = shopsData.data.reduce((result, shop) => {
-        result[shop.id] = shop
-        return result
-      }, {})
-      this.setState({shops: shops})
-    })
     orderService.find({query: {notIn: 'new', shop_id: currentShop}}).then(orders => {
       var ordersById = orders.reduce((result, order) => {
         result[order.order_id] = order
@@ -31,13 +23,19 @@ class App extends Component {
       }, {})
       this.setState({ordersById: ordersById})
     })
-
+  }
+  componentDidMount() {
+    var { currentShop, ordersById } = this.state
+    shopService.find().then(shopsData => {
+      var shops = shopsData.data.reduce((result, shop) => {
+        result[shop.id] = shop
+        return result
+      }, {})
+      this.setState({shops: shops})
+    })
+    this.refreshOrders()
     orderService.on('patched', (order) => {
-      let temp = this.state.ordersById
-      temp[order.order_id] = order
-      this.setState({
-        ordersById: temp
-      })
+      this.refreshOrders()
     })
   }
 
@@ -70,7 +68,7 @@ class App extends Component {
           {map(ordersById, (order, id) => {
             return (
               <div key={id} style={{background: 'lightblue'}}>
-                <h2>{order.name} {order.phone}</h2>
+                <h2>{order.name} {order.phone} {order.order_id}</h2>
                 <h4>{moment(order.ordered).format('MMMM Do YYYY, h:mm:ss a')}</h4>
                 <Order order_id ={order.order_id} coffees ={order.coffees} status ={order.status} updateStatus ={this.updateStatus} />
               </div>
