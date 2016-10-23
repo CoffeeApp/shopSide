@@ -1,12 +1,16 @@
 const banner = {
   backgroundColor: '#3f0000',
-
+  textAlign: 'center',
+  color:'white',
+  height:'225vh'
 }
 
 const image = {
-  height: '8em',
-  padding: '10px'
-
+  width:'60%',
+  borderStyle: 'solid',
+  border: '1px solid white',
+  // height: '8em',
+  // padding: '10px'
 }
 
 const currentOrders = {
@@ -14,18 +18,18 @@ const currentOrders = {
 }
 
 const text = {
-  textAlign: 'center',
-  color: '#fff',
-  fontFamily: 'Open Sans, sans-serif'
+  // textAlign: 'center',
+  // color: '#fff',
+  // fontFamily: 'Open Sans, sans-serif'
 }
 
 const bsStyle = {
-  background:'red',
+  // background:'red',
 }
 
 export {
   banner,
   image,
   currentOrders,
-  text
+  text,
 }

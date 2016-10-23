@@ -12,8 +12,10 @@ class Banner extends Component {
     return (
       <div style={banner}>
         <h1 style={text}>Coffee App</h1>
-        <h4 style={text}>{shop_id}</h4>
+        <hr/>
+        <h3 style={text}>{shop_id}</h3>
         <img style={image} src="http://gaycities-listing-images-production.s3.amazonaws.com/medsq_restaurants-61116-Fidels-Cafe-1081f.jpg" />
+        <hr/>
         <h2 style={currentOrders}>Total orders: {number}</h2>
       </div>
     )

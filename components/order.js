@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
 
+const newClass = {
+  backgroundColor: 'blue',
+  color:'red',
+
+}
+
 class Order extends Component {
   constructor(props) {
     super(props)
@@ -21,29 +27,27 @@ class Order extends Component {
     console.log('I HAVE PROPS ', this.props.order_id)
     const {coffees} = this.props
     return (
+        <div><hr/>
+        <button id ={this.props.order_id} className={newClass} type="button" className="btn btn-lg btn-block" onClick= {this.handleStart}>Start</button>
 
-      <div className="container-fluid">
-          <div className="row">
-            <div className="col-xs-6 col-md-4">
-      <div style={{background: 'yellow'}}>
-        <button id ={this.props.order_id} className="btn btn-primary" type="button" className="btn" onClick= {this.handleStart}>start</button>
-        <button id ={this.props.order_id} className="btn btn-default" onClick = {this.handleComplete}>complete</button>
-        {
+        <button id ={this.props.order_id} className="btn btn-default btn-lg btn-block" onClick = {this.handleComplete}>In Progress</button>
+
+        <button id ={this.props.order_id} className="btn btn-default btn-lg btn-block" onClick = {this.handleComplete}>Order Completed</button>
+          {
           coffees.map((coffee, i) => {
             const {qty, sugar, milk, type} = coffee
             return (
-              <div key ={i} style={{background: 'pink'}}>
-                <h1>{qty} {type}</h1>
-                <h2>{sugar} sugar</h2>
-                <h2>{milk} milk</h2>
+              <div key ={i} style={{background: '#3f0000',color:'#ecf0f1',  padding:'20px'}}>
+              <hr/>
+                <h3>{qty} {qty > 1 ? type + 's' : type}</h3>
+                <h3>{sugar} {sugar > 1 ? 'sugars' : 'sugar'} each</h3>
+                <h3> {qty > 1 ? 'all with' : 'with'} {milk} milk</h3>
               </div>
             )
           })
         }
       </div>
-      </div>
-      </div>
-      </div>
+
     )
   }
 }
