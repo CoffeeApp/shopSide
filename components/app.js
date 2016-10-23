@@ -66,12 +66,15 @@ class App extends Component {
   }
 
   componentDidMount() {
-    orderService.find().then(orders => {
+    orderService.find({query: {notIn: 'new'}}).then(orders => {
+      console.log('orders found are: ', orders);
       var ordersById = orders.reduce((result, order) => {
         result[order.order_id] = order
         return result
       }, {})
+      console.log('ordersById after find is: ', ordersById);
       this.setState({ordersById: ordersById})
+      console.log('ordersById after state set is: ', ordersById);
     })
     orderService.on('created', (order) => {
       console.log('Someone created an order', order);
@@ -85,7 +88,6 @@ class App extends Component {
     })
     orderService.on('patched', (order) => {
       console.log('client has received status: ', order);
-
     })
   }
 
@@ -101,20 +103,19 @@ class App extends Component {
   }
 
   updateStatus(id, status) {
-    console.log('I am in updateStatus');
     let temp = this.state.ordersById
     temp[id].status = status
     this.setState({
       ordersById: temp
     })
-    console.log(this.state);
+    orderService.patch(id, {status: status})
   }
 
   render () {
     const {ordersById} = this.state
     return (
       <div>
-        <Banner shop_id={ordersById[1].shop_id} number={Object.keys(ordersById).length} changeUser={this.changeUser}/>
+        <Banner  number={Object.keys(ordersById).length} changeUser={this.changeUser}/>
         {map(ordersById, (order, id) => {
           return (
             <div key={id} style={{background: 'lightblue'}}>

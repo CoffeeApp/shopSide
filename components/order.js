@@ -8,7 +8,6 @@ class Order extends Component {
 
   render() {
     const {coffees} = this.props
-    console.log('order has props: ', this.props);
     return (
       <div style={{background: 'yellow'}}>
         <OrderStatus order_id ={this.props.order_id}  status ={this.props.status} updateStatus ={this.props.updateStatus}/>
