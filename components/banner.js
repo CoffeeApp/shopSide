@@ -16,16 +16,24 @@ class Banner extends Component {
     return (
       <div>
       <select id="great-names" onChange={this.handleChange}>
-        <option value="Fidel's Cafe">
-          Fidels Cafe
+        <option value="1">
+          Fidel's Cafe
         </option>
 
-        <option value="Raglan Roast">
+        <option value="2">
           Raglan Roast
         </option>
 
-        <option value="Havana">
-          Havana
+        <option value="3">
+          Havana Bar
+        </option>
+
+        <option value="4">
+          Laundry
+        </option>
+
+        <option value="5">
+          Southern Cross
         </option>
       </select>
         <h1>{shop_id}</h1>

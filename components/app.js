@@ -9,72 +9,20 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      ordersById: {
-        1: {
-          "order_id": 1,
-          "shop_id": "Fidel's Cafe",
-          "status": 'new',
-          "coffees": [
-            {
-              "type": "flat white",
-              "qty": 1,
-              "milk": "trim",
-              "sugar": 1
-            },
-            {
-              "type": "americano",
-              "qty": 2,
-              "milk": "soy",
-              "sugar": 0
-            }
-          ],
-          "details": {
-            "price": 6.00,
-            "name": "Jeremy",
-            "phone": "021 225 555",
-            "ordered": "10:39:50"
-          }
-        },
-        2:  {
-          "order_id": 2,
-          "shop_id": "Fidel's Cafe",
-          "status": 'new',
-          "coffees": [
-            {
-              "type": "flat white",
-              "qty": 1,
-              "milk": "trim",
-              "sugar": 1
-            },
-            {
-              "type": "americano",
-              "qty": 2,
-              "milk": "soy",
-              "sugar": 100
-            }
-          ],
-          "details": {
-            "price": 6.00,
-            "name": "Jessica",
-            "phone": "021 225 555",
-            "ordered": "11:39:50"
-          }
-        }
-      }
+      currentShop: 1
     }
     this.updateStatus = this.updateStatus.bind(this)
+    this.changeUser = this.changeUser.bind(this)
   }
 
   componentDidMount() {
-    orderService.find({query: {notIn: 'new'}}).then(orders => {
-      console.log('orders found are: ', orders);
+    var { currentShop } = this.state
+    orderService.find({query: {notIn: 'new', shop_id: currentShop}}).then(orders => {
       var ordersById = orders.reduce((result, order) => {
         result[order.order_id] = order
         return result
       }, {})
-      console.log('ordersById after find is: ', ordersById);
       this.setState({ordersById: ordersById})
-      console.log('ordersById after state set is: ', ordersById);
     })
     orderService.on('created', (order) => {
       console.log('Someone created an order', order);
@@ -91,15 +39,17 @@ class App extends Component {
     })
   }
 
-  changeUser(user) {
-    console.log('I am in app.js', user)
-    // orderService.find(user).then(orders => {
-    //   var ordersById = orders.reduce((result, order) => {
-    //     result[order.order_id] = order
-    //     return result
-    //   }, {})
-    //   this.setState({ordersById: ordersById})
-    // })
+  changeUser(id) {
+    console.log('changed to shop : ', id);
+    orderService.find({query: {notIn: 'new', shop_id: id}})
+    .then(orders => {
+      var ordersById = orders.reduce((result, order) => {
+        result[order.order_id] = order
+        return result
+      }, {})
+      this.setState({currentShop: id, ordersById: ordersById})
+    })
+    console.log('AFTER', 'query ', id, 'shop', this.state.currentShop)
   }
 
   updateStatus(id, status) {
@@ -113,20 +63,24 @@ class App extends Component {
 
   render () {
     const {ordersById} = this.state
-    return (
-      <div>
-        <Banner  number={Object.keys(ordersById).length} changeUser={this.changeUser}/>
-        {map(ordersById, (order, id) => {
-          return (
-            <div key={id} style={{background: 'lightblue'}}>
-              <h2>{order.name} {order.phone}</h2>
-              <h4>{moment(order.ordered).format('MMMM Do YYYY, h:mm:ss a')}</h4>
-              <Order order_id ={order.order_id} coffees ={order.coffees} status ={order.status} updateStatus ={this.updateStatus} />
-            </div>
-          )
-          })}
-      </div>
-    )
+    console.log('RENDER', 'shop', this.state.currentShop)
+    if(ordersById) {
+      return (
+        <div>
+          <Banner  number={Object.keys(ordersById).length} changeUser={this.changeUser} shop_id={this.state.shop_id}/>
+          {map(ordersById, (order, id) => {
+            return (
+              <div key={id} style={{background: 'lightblue'}}>
+                <h2>{order.name} {order.phone}</h2>
+                <h4>{moment(order.ordered).format('MMMM Do YYYY, h:mm:ss a')}</h4>
+                <Order order_id ={order.order_id} coffees ={order.coffees} status ={order.status} updateStatus ={this.updateStatus} />
+              </div>
+            )
+            })}
+        </div>
+      )
+    }
+    return <div></div>
   }
 
 }
