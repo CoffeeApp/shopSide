@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { banner, image, currentOrders, text } from '../styles/bannerStyle'
 
 class Banner extends Component {
 
@@ -7,13 +8,13 @@ class Banner extends Component {
   }
 
   render () {
-    console.log('BANNER: ', this.props);
     const {shop_id, number} = this.props
     return (
-      <div>
-        <h1>{shop_id}</h1>
-        <img src="http://gaycities-listing-images-production.s3.amazonaws.com/medsq_restaurants-61116-Fidels-Cafe-1081f.jpg" />
-        <h2>Total orders: {number}</h2>
+      <div style={banner}>
+        <h1 style={text}>Coffee App</h1>
+        <h4 style={text}>{shop_id}</h4>
+        <img style={image} src="http://gaycities-listing-images-production.s3.amazonaws.com/medsq_restaurants-61116-Fidels-Cafe-1081f.jpg" />
+        <h2 style={currentOrders}>Total orders: {number}</h2>
       </div>
     )
   }

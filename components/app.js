@@ -13,6 +13,8 @@ class App extends Component {
         1: {
           "order_id": 1,
           "shop_id": "Fidel's Cafe",
+          "name": "Jeremy",
+          "phone": "021 225 555",
           "status": 'new',
           "coffees": [
             {
@@ -27,17 +29,13 @@ class App extends Component {
               "milk": "soy",
               "sugar": 0
             }
-          ],
-          "details": {
-            "price": 6.00,
-            "name": "Jeremy",
-            "phone": "021 225 555",
-            "ordered": "10:39:50"
-          }
+          ]
         },
         2:  {
           "order_id": 2,
           "shop_id": "Fidel's Cafe",
+          "name": "Jessica",
+          "phone": "021 225 555",
           "status": 'new',
           "coffees": [
             {
@@ -52,13 +50,7 @@ class App extends Component {
               "milk": "soy",
               "sugar": 100
             }
-          ],
-          "details": {
-            "price": 6.00,
-            "name": "Jessica",
-            "phone": "021 225 555",
-            "ordered": "11:39:50"
-          }
+          ]
         }
       }
     }
@@ -115,18 +107,22 @@ class App extends Component {
   render () {
     const {ordersById} = this.state
     return (
-      <div>
-        <h1>I am App</h1>
+      <div className="container-fluid">
+          <div className="row">
+            <div className="col-xs-12 col-md-6">
         <Banner shop_id={ordersById[1].shop_id} number={Object.keys(ordersById).length}/>
         {map(ordersById, (order, id) => {
           return (
             <div key={id} style={{background: 'lightblue'}}>
               <h2>{order.name} {order.phone}</h2>
               <h4>{moment(order.ordered).format('MMMM Do YYYY, h:mm:ss a')}</h4>
+              <h4>Order Status: {order.status}</h4>
               <Order order_id ={order.order_id} coffees ={order.coffees} startOrder ={this.startOrder} completeOrder ={this.completeOrder}/>
             </div>
           )
           })}
+      </div>
+      </div>
       </div>
     )
   }

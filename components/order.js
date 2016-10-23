@@ -21,9 +21,13 @@ class Order extends Component {
     console.log('I HAVE PROPS ', this.props.order_id)
     const {coffees} = this.props
     return (
+
+      <div className="container-fluid">
+          <div className="row">
+            <div className="col-xs-6 col-md-4">
       <div style={{background: 'yellow'}}>
-        <button id ={this.props.order_id} onClick= {this.handleStart}>start</button>
-        <button id ={this.props.order_id} onClick = {this.handleComplete}>complete</button>
+        <button id ={this.props.order_id} className="btn btn-primary" type="button" className="btn" onClick= {this.handleStart}>start</button>
+        <button id ={this.props.order_id} className="btn btn-default" onClick = {this.handleComplete}>complete</button>
         {
           coffees.map((coffee, i) => {
             const {qty, sugar, milk, type} = coffee
@@ -37,8 +41,12 @@ class Order extends Component {
           })
         }
       </div>
+      </div>
+      </div>
+      </div>
     )
   }
 }
+
 
 export default Order
