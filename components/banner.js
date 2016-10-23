@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { map } from 'lodash'
 
 class Banner extends Component {
 
@@ -12,31 +13,19 @@ class Banner extends Component {
   }
 
   render () {
-    const {shop_name, number} = this.props
+    const {number, shops, currentShop} = this.props
     return (
       <div>
       <select id="great-names" onChange={this.handleChange}>
-        <option value="1">
-          Fidel's Cafe
-        </option>
 
-        <option value="2">
-          Raglan Roast
+      {map(shops, (shop, i) => {
+        return <option value={shop.id} key={i}>
+          {shop.name}
         </option>
+        })}
 
-        <option value="3">
-          Havana Bar
-        </option>
-
-        <option value="4">
-          Laundry
-        </option>
-
-        <option value="5">
-          Southern Cross
-        </option>
       </select>
-        <h1>{shop_name}</h1>
+        <h1>{shops[currentShop].name}</h1>
         <img src="http://gaycities-listing-images-production.s3.amazonaws.com/medsq_restaurants-61116-Fidels-Cafe-1081f.jpg" />
         <h2>Total orders: {number}</h2>
       </div>

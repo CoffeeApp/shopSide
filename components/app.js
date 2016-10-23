@@ -31,7 +31,7 @@ class App extends Component {
       }, {})
       this.setState({ordersById: ordersById})
     })
-    
+
     orderService.on('patched', (order) => {
       let temp = this.state.ordersById
       temp[order.order_id] = order
@@ -66,7 +66,7 @@ class App extends Component {
     if(ordersById) {
       return (
         <div>
-          <Banner  number={Object.keys(ordersById).length} changeUser={this.changeUser} shop_name={shops[currentShop].name}/>
+          <Banner  number={Object.keys(ordersById).length} changeUser={this.changeUser} shops={shops} currentShop={currentShop}/>
           {map(ordersById, (order, id) => {
             return (
               <div key={id} style={{background: 'lightblue'}}>
