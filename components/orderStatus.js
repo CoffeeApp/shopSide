@@ -13,9 +13,9 @@ class OrderStatus extends Component {
   render() {
     return (
       <div>
-        <button id ={this.props.order_id} onClick= {this.handleUpdate} value="started">start</button>
-        <button id ={this.props.order_id} onClick = {this.handleUpdate} value="ready for collection">ready</button>
-        <button id ={this.props.order_id} onClick = {this.handleUpdate} value="complete">complete</button>
+        <button id ={this.props.order_id} type="button" className="btn btn-lg btn-block active" onClick= {this.handleUpdate} value="started">start</button>
+        <button id ={this.props.order_id} type="button" className="btn btn-lg btn-block" onClick = {this.handleUpdate} value="ready for collection">ready</button>
+        <button id ={this.props.order_id} type="button" className="btn btn-lg btn-block" onClick = {this.handleUpdate} value="complete">complete</button>
       </div>
     )
   }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { banner, image, currentOrders, text } from '../styles/bannerStyle'
+import { banner, image, select, text, current, imageCon } from '../styles/bannerStyle'
 import { map } from 'lodash'
 
 class Banner extends Component {
@@ -15,10 +15,10 @@ class Banner extends Component {
 
   render () {
     const {number, shops, currentShop} = this.props
+    console.log('shops: ',shops);
     return (
       <div>
-      <select id="great-names" onChange={this.handleChange}>
-
+      <select id="great-names" style={select} onChange={this.handleChange}>
       {map(shops, (shop, i) => {
         return <option value={shop.id} key={i}>
           {shop.name}
@@ -26,9 +26,11 @@ class Banner extends Component {
         })}
 
       </select>
-        <h1>{shops[currentShop].name}</h1>
-        <img src="http://gaycities-listing-images-production.s3.amazonaws.com/medsq_restaurants-61116-Fidels-Cafe-1081f.jpg" />
-        <h2>Total orders: {number}</h2>
+        <h1 style={current}>{shops[currentShop].name}</h1>
+        <div style={imageCon}>
+          <img style={image} src="http://gaycities-listing-images-production.s3.amazonaws.com/medsq_restaurants-61116-Fidels-Cafe-1081f.jpg" />
+        </div>
+        <h2 style={current}>Total orders: {number}</h2>
       </div>
     )
   }
