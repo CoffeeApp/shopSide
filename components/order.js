@@ -37,7 +37,7 @@ class Order extends Component {
           coffees.map((coffee, i) => {
             const {qty, sugar, milk, type} = coffee
             return (
-              <div key ={i} style={{background: '#3f0000',color:'#ecf0f1',  padding:'20px'}}>
+              <div key ={i} style={{background: '#3f0000',color:'#ecf0f1',  padding:'50px',paddingLeft:'40px'}}>
               <hr/>
                 <h3>{qty} {qty > 1 ? type + 's' : type}</h3>
                 <h3>{sugar} {sugar > 1 ? 'sugars' : 'sugar'} each</h3>

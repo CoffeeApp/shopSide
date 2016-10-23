@@ -18,6 +18,7 @@ const currentOrders = {
 }
 
 const text = {
+  padding:"20px",
   // textAlign: 'center',
   // color: '#fff',
   // fontFamily: 'Open Sans, sans-serif'
