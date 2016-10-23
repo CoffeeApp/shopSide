@@ -90,6 +90,10 @@ class App extends Component {
     })
   }
 
+  changeUser(user) {
+    console.log('I am in app.js', user)
+  }
+
   startOrder(id) {
     console.log('I am startOrder in app.js with id:', id);
     let temp = this.state.ordersById
@@ -116,8 +120,7 @@ class App extends Component {
     const {ordersById} = this.state
     return (
       <div>
-        <h1>I am App</h1>
-        <Banner shop_id={ordersById[1].shop_id} number={Object.keys(ordersById).length}/>
+        <Banner shop_id={ordersById[1].shop_id} number={Object.keys(ordersById).length} changeUser={this.changeUser}/>
         {map(ordersById, (order, id) => {
           return (
             <div key={id} style={{background: 'lightblue'}}>
