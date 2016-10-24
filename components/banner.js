@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { banner, image, currentOrders, text } from '../styles/bannerStyle'
 import { map } from 'lodash'
+import moment from 'moment'
 
 class Banner extends Component {
 
@@ -14,21 +15,19 @@ class Banner extends Component {
   }
 
   render () {
-    const {number, shops, currentShop} = this.props
+    const {ordersById, number, shops, currentShop} = this.props
     return (
       <div>
-      <select id="great-names" onChange={this.handleChange}>
-
-      {map(shops, (shop, i) => {
-        return <option value={shop.id} key={i}>
-          {shop.name}
-        </option>
-        })}
-
-      </select>
+        <img style={{maxHeight: 200}} src={shops[currentShop].image}/>
         <h1>{shops[currentShop].name}</h1>
-        <img src="http://gaycities-listing-images-production.s3.amazonaws.com/medsq_restaurants-61116-Fidels-Cafe-1081f.jpg" />
-        <h2>Total orders: {number}</h2>
+        <select id="great-names" onChange={this.handleChange}>
+          {map(shops, (shop, i) => {
+            return <option value={shop.id} key={i}>
+              {shop.name}
+            </option>
+            })}
+        </select>
+        <h2>Total orders: {Object.keys(ordersById).length}</h2>
       </div>
     )
   }

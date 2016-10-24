@@ -1,58 +1,15 @@
 import React, { Component } from 'react'
 import Banner from './banner'
 import Order from './order'
-import {api, orderService, shopService} from '../api'
+import { orderService, shopService } from '../api'
 import { map } from 'lodash'
-import moment from 'moment'
+
 class App extends Component {
 
   constructor (props) {
     super(props)
     this.state = {
-      ordersById: {
-        1: {
-          "order_id": 1,
-          "shop_id": "Fidel's Cafe",
-          "name": "Jeremy",
-          "phone": "021 225 555",
-          "status": 'new',
-          "coffees": [
-            {
-              "type": "flat white",
-              "qty": 1,
-              "milk": "trim",
-              "sugar": 1
-            },
-            {
-              "type": "americano",
-              "qty": 2,
-              "milk": "soy",
-              "sugar": 0
-            }
-          ]
-        },
-        2:  {
-          "order_id": 2,
-          "shop_id": "Fidel's Cafe",
-          "name": "Jessica",
-          "phone": "021 225 555",
-          "status": 'new',
-          "coffees": [
-            {
-              "type": "flat white",
-              "qty": 1,
-              "milk": "trim",
-              "sugar": 1
-            },
-            {
-              "type": "americano",
-              "qty": 2,
-              "milk": "soy",
-              "sugar": 100
-            }
-          ]
-        }
-      },
+      shops: {},
       currentShop: 1
     }
     this.updateStatus = this.updateStatus.bind(this)
@@ -68,6 +25,7 @@ class App extends Component {
       }, {})
       this.setState({shops: shops})
     })
+
     orderService.find({query: {notIn: 'new', shop_id: currentShop}}).then(orders => {
       var ordersById = orders.reduce((result, order) => {
         result[order.order_id] = order
@@ -105,25 +63,28 @@ class App extends Component {
     orderService.patch(id, {status: status})
   }
 
+  renderOrders(ordersById) {
+    return map(ordersById, (order, i) => {
+      return (
+        <div key={i}>
+          <Order {...order} updateStatus = {this.updateStatus} />
+        </div>
+      )
+    })
+  }
+
   render () {
-    const {ordersById, shops, currentShop} = this.state
+    const {ordersById} = this.state
     if(ordersById) {
       return (
         <div>
-          <Banner  number={Object.keys(ordersById).length} changeUser={this.changeUser} shops={shops} currentShop={currentShop}/>
-          {map(ordersById, (order, id) => {
-            return (
-              <div key={id} style={{background: 'lightblue'}}>
-                <h2>{order.name} {order.phone}</h2>
-                <h4>{moment(order.ordered).format('MMMM Do YYYY, h:mm:ss a')}</h4>
-                <Order order_id ={order.order_id} coffees ={order.coffees} status ={order.status} updateStatus ={this.updateStatus} />
-              </div>
-            )
-            })}
+          <Banner {...this.state} changeUser={this.changeUser}/>
+          {this.renderOrders(ordersById)}
         </div>
       )
+    } else {
+      return <div></div>
     }
-    return <div></div>
   }
 
 }

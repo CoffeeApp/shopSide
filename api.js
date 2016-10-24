@@ -1,7 +1,10 @@
 const feathers = require('feathers-client')
 const io = require('socket.io-client')
 
+// run off localhost:3030???
 const socket = io('https://coffee-cloud.herokuapp.com/')
+
+
 
 var api = feathers()
 .configure(feathers.hooks())
