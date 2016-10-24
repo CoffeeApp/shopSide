@@ -26,7 +26,7 @@ class Banner extends Component {
         })}
 
       </select>
-        <h1>{shops[currentShop].name}</h1>
+        <h1>{}</h1>
         <img src="http://gaycities-listing-images-production.s3.amazonaws.com/medsq_restaurants-61116-Fidels-Cafe-1081f.jpg" />
         <h2>Total orders: {number}</h2>
       </div>

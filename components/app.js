@@ -2,57 +2,14 @@ import React, { Component } from 'react'
 import Banner from './banner'
 import Order from './order'
 import {api, orderService, shopService} from '../api'
-import { map } from 'lodash'
+import { map, groupBy } from 'lodash'
 import moment from 'moment'
 class App extends Component {
 
   constructor (props) {
     super(props)
     this.state = {
-      ordersById: {
-        1: {
-          "order_id": 1,
-          "shop_id": "Fidel's Cafe",
-          "name": "Jeremy",
-          "phone": "021 225 555",
-          "status": 'new',
-          "coffees": [
-            {
-              "type": "flat white",
-              "qty": 1,
-              "milk": "trim",
-              "sugar": 1
-            },
-            {
-              "type": "americano",
-              "qty": 2,
-              "milk": "soy",
-              "sugar": 0
-            }
-          ]
-        },
-        2:  {
-          "order_id": 2,
-          "shop_id": "Fidel's Cafe",
-          "name": "Jessica",
-          "phone": "021 225 555",
-          "status": 'new',
-          "coffees": [
-            {
-              "type": "flat white",
-              "qty": 1,
-              "milk": "trim",
-              "sugar": 1
-            },
-            {
-              "type": "americano",
-              "qty": 2,
-              "milk": "soy",
-              "sugar": 100
-            }
-          ]
-        }
-      },
+      ordersById: {}, // replace with empty data structures
       currentShop: 1
     }
     this.updateStatus = this.updateStatus.bind(this)
@@ -61,8 +18,11 @@ class App extends Component {
 
   componentDidMount() {
     var { currentShop } = this.state
-    shopService.find().then(shopsData => {
-      var shops = shopsData.data.reduce((result, shop) => {
+    shopService
+      .find()  // chained funtion on new line
+      .then(shopsData => {
+        var s = groupBy(shopsData.data, 'order_id') // investigate groupBY
+        var shops = shopsData.data.reduce((result, shop) => {
         result[shop.id] = shop
         return result
       }, {})
@@ -77,26 +37,25 @@ class App extends Component {
     })
 
     orderService.on('patched', (order) => {
-      let temp = this.state.ordersById
-      temp[order.order_id] = order
-      this.setState({
-        ordersById: temp
-      })
+      const ordersById = this.state.ordersById
+      ordersById[order.order_id] = order
+      this.setState({ ordersById })
     })
   }
 
-  changeUser(id) {
-    orderService.find({query: {notIn: 'new', shop_id: id}})
+  changeUser(shop_id) {
+    orderService.find({query: {notIn: 'new', shop_id }}) // use 1 name for variable, leverage shorthand
     .then(orders => {
-      var ordersById = orders.reduce((result, order) => {
+      var ordersById = orders.reduce((result, order) => { // groupBy id
         result[order.order_id] = order
         return result
       }, {})
-      this.setState({currentShop: id, ordersById: ordersById})
+      this.setState({currentShop: shop_id, ordersById })
     })
   }
 
   updateStatus(id, status) {
+    // as above 
     let temp = this.state.ordersById
     temp[id].status = status
     this.setState({
@@ -105,25 +64,26 @@ class App extends Component {
     orderService.patch(id, {status: status})
   }
 
+  renderOrders(ordersById) {
+    return map(ordersById, (order, id) => {
+      return <Order {...order} updateStatus ={this.updateStatus} />
+    })
+  }
+
   render () {
+    // good use of destructuring
     const {ordersById, shops, currentShop} = this.state
-    if(ordersById) {
-      return (
-        <div>
-          <Banner  number={Object.keys(ordersById).length} changeUser={this.changeUser} shops={shops} currentShop={currentShop}/>
-          {map(ordersById, (order, id) => {
-            return (
-              <div key={id} style={{background: 'lightblue'}}>
-                <h2>{order.name} {order.phone}</h2>
-                <h4>{moment(order.ordered).format('MMMM Do YYYY, h:mm:ss a')}</h4>
-                <Order order_id ={order.order_id} coffees ={order.coffees} status ={order.status} updateStatus ={this.updateStatus} />
-              </div>
-            )
-            })}
-        </div>
-      )
-    }
-    return <div></div>
+
+    return (
+      <div>
+        <Banner  
+          number={Object.keys(ordersById).length} 
+          changeUser={this.changeUser} 
+          shops={shops} 
+          currentShop={currentShop}/>
+          {this.renderOrders(ordersById)}
+      </div>
+    )
   }
 
 }

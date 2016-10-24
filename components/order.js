@@ -7,17 +7,35 @@ const newClass = {
 
 }
 
+// refactor to a stateless functional
+
 class Order extends Component {
   constructor(props) {
     super(props)
   }
 
   render() {
-    const {coffees} = this.props
+    const {
+      coffees, 
+      phone, 
+      ordered, 
+      order_id, 
+      status, 
+      name, 
+      updateStatus} = this.props
+
+    // reafactor an place inside OrderStatus
+    // Decide on a single styling solution per repo? or project?
     return (
-      <div style={{background: 'yellow'}}>
-        <OrderStatus order_id ={this.props.order_id}  status ={this.props.status} updateStatus ={this.props.updateStatus}/>
-        <h3>Status: <span>{this.props.status}</span></h3>
+      <div key={id} style={{background: 'lightblue'}}>
+        <h2>{name} {phone}</h2>
+        <h4>{moment(ordered).format('MMMM Do YYYY, h:mm:ss a')}</h4>
+        <div style={{background: 'yellow'}}>
+        <OrderStatus
+          order_id={order_id}  
+          status={status} 
+          updateStatus ={updateStatus}/>
+        <h3>Status: <span>{status}</span></h3>
         {
           coffees.map((coffee, i) => {
             const {qty, sugar, milk, type} = coffee
@@ -31,6 +49,7 @@ class Order extends Component {
             )
           })
         }
+        </div>
       </div>
 
     )
