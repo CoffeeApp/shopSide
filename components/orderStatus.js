@@ -17,7 +17,7 @@ class OrderStatus extends Component {
       <div>
         <h2>{name} {phone}</h2>
         <h4>{moment(ordered).format('MMMM Do YYYY, h:mm:ss a')}</h4>
-        <h3>Order status: {status}</h3>
+        <h3>Order status: <span>{status}</span></h3>
         <button id ={order_id} onClick= {this.handleUpdate} value="started">start</button>
         <button id ={order_id} onClick = {this.handleUpdate} value="ready for collection">ready</button>
         <button id ={order_id} onClick = {this.handleUpdate} value="complete">complete</button>
