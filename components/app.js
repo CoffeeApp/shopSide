@@ -40,6 +40,7 @@ class App extends Component {
   }
 
   changeUser(id) {
+    // poss change to refreshOrders
     orderService.find({query: {notIn: 'new', shop_id: id}})
     .then(orders => {
       var ordersById = orders.reduce((result, order) => {
