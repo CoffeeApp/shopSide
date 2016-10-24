@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
+import moment from 'moment'
 
-
-// refactor to a stateless functional component
-// const OrderStatus = ({order_id, updateStatus}) => ( re
-// not a biggy
 class OrderStatus extends Component {
   constructor(props) {
     super(props)
@@ -15,13 +12,15 @@ class OrderStatus extends Component {
   }
 
   render() {
-
+    const { name, phone, ordered, order_id, status } = this.props
     return (
       <div>
-        <button id ={this.props.order_id} onClick= {this.handleUpdate} value="started">start</button>
-        <button id ={this.props.order_id} onClick = {this.handleUpdate} value="ready for collection">ready</button>
-        <button id ={this.props.order_id} 
-        onClick = {() => updateStatus()} value="complete">complete</button>
+        <h2>{name} {phone}</h2>
+        <h4>{moment(ordered).format('MMMM Do YYYY, h:mm:ss a')}</h4>
+        <h3>Order status: {status}</h3>
+        <button id ={order_id} onClick= {this.handleUpdate} value="started">start</button>
+        <button id ={order_id} onClick = {this.handleUpdate} value="ready for collection">ready</button>
+        <button id ={order_id} onClick = {this.handleUpdate} value="complete">complete</button>
       </div>
     )
   }
