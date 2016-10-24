@@ -15,7 +15,16 @@ class App extends Component {
     this.updateStatus = this.updateStatus.bind(this)
     this.changeUser = this.changeUser.bind(this)
   }
-
+  refreshOrders() {
+    var {currentShop} = this.state
+    orderService.find({query: {notIn: 'new', shop_id: currentShop}}).then(orders => {
+      var ordersById = orders.reduce((result, order) => {
+        result[order.order_id] = order
+        return result
+      }, {})
+      this.setState({ordersById: ordersById})
+    })
+  }
   componentDidMount() {
     var { currentShop } = this.state
     shopService.find().then(shopsData => {
@@ -26,20 +35,10 @@ class App extends Component {
       this.setState({shops: shops})
     })
 
-    orderService.find({query: {notIn: 'new', shop_id: currentShop}}).then(orders => {
-      var ordersById = orders.reduce((result, order) => {
-        result[order.order_id] = order
-        return result
-      }, {})
-      this.setState({ordersById: ordersById})
-    })
+    this.refreshOrders()
 
     orderService.on('patched', (order) => {
-      let temp = this.state.ordersById
-      temp[order.order_id] = order
-      this.setState({
-        ordersById: temp
-      })
+      this.refreshOrders()
     })
   }
 
