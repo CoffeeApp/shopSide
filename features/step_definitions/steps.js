@@ -22,8 +22,6 @@ module.exports = function () {
     browser.submitForm(`#${formName}`)
   })
 
-
-
   this.Then('I can see the cafe name "$string"', function (name, callback) {
     var cafeNameExists = browser.waitForExist(`h1=${name}`)
     assert.equal(cafeNameExists, true, callback)

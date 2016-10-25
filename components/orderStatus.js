@@ -12,15 +12,19 @@ class OrderStatus extends Component {
   }
 
   render() {
-    const { name, phone, ordered, order_id, status } = this.props
+    const { name, phone, comment, ordered, ready_time, order_id, status } = this.props
     return (
       <div>
-        <h2>{name} {phone}</h2>
-        <h4>{moment(ordered).format('MMMM Do YYYY, h:mm:ss a')}</h4>
+        <h2>Name: {name}</h2>
+        <h2>Phone: {phone}</h2>
+        <h2>Notes: {comment}</h2>
+        <h4>Ordered: {moment(ordered).format('h:mm a')}</h4>
+        <h4>Pick up: {ready_time}</h4>
         <h3>Order status: <span>{status}</span></h3>
-        <button id ={order_id} onClick= {this.handleUpdate} value="started">start</button>
-        <button id ={order_id} onClick = {this.handleUpdate} value="ready for collection">ready</button>
-        <button id ={order_id} onClick = {this.handleUpdate} value="complete">complete</button>
+        <button id ={order_id} onClick= {this.handleUpdate} value="NEW">RESET</button>
+        <button id ={order_id} onClick= {this.handleUpdate} value="IN PROGRESS">START</button>
+        <button id ={order_id} onClick = {this.handleUpdate} value="READY">READY</button>
+        <button id ={order_id} onClick = {this.handleUpdate} value="COMPLETE">COMPLETE</button>
       </div>
     )
   }
