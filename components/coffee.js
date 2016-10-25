@@ -1,18 +1,15 @@
 import React, { Component } from 'react'
 
 function Coffee (props) {
-  const {qty, sugar, milk, type} = props
+  const {qty, quantity, sugar, milk, type} = props
   return (
-    <div style={{
-      background: '#3f0000',
-      color:'#ecf0f1',
-      padding:'50px',
-      paddingLeft:'40px'
-    }}>
-      <h3>{qty} {qty > 1 ? type + 's' : type}</h3>
-      <h3>{sugar} {sugar > 1 ? 'sugars' : 'sugar'} each</h3>
-      <h3> {qty > 1 ? 'all with' : 'with'} {milk} milk</h3>
-    </div>
+      <div className="coffeeOrders">
+        <h2>{quantity} x {quantity > 1 ? type + 's' : type}</h2>
+          <ul>
+            <li className="coffeeSpecs">{milk}</li>
+            <li className="coffeeSpecs">{sugar > 0 ? sugar + ' x sugar' : ''}</li>
+          </ul>
+      </div>
   )
 }
 

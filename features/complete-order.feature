@@ -6,5 +6,5 @@ Feature: Test start button
   Scenario: I want to see my current coffee orders
     Given I am viewing the page at "/"
     And I can see the cafe name "Fidel's Cafe"
-    When I click on the button with value "complete"
-    Then I can see status change to "complete"
+    When I click on the button with value "COMPLETE"
+    Then I can see status change to "COMPLETE"

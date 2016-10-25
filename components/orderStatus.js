@@ -12,15 +12,22 @@ class OrderStatus extends Component {
   }
 
   render() {
-    const { name, phone, ordered, order_id, status } = this.props
+    const { name, phone, ordered, order_id, status, ready_time } = this.props
     return (
-      <div>
-        <h2>{name} {phone}</h2>
-        <h4>{moment(ordered).format('MMMM Do YYYY, h:mm:ss a')}</h4>
-        <h3>Order status: {status}</h3>
-        <button id ={order_id} onClick= {this.handleUpdate} value="started">start</button>
-        <button id ={order_id} onClick = {this.handleUpdate} value="ready for collection">ready</button>
-        <button id ={order_id} onClick = {this.handleUpdate} value="complete">complete</button>
+      <div className="item">
+        <div className="contactDetails">
+          <h2><span className="fontColor">Name:</span> {name}</h2>
+          <h2><span className="fontColor">Telephone:</span> {phone}</h2>
+          <h4><span className="fontColor">Ordered:</span> {moment(ordered).format('h:mm a, MMMM Do YYYY')}</h4>
+        </div>
+        <div className="orderStatus">
+          <h4><span className="fontColor">Pick up:</span> {ready_time}</h4>
+          <h3><span className="fontColor">Order status:</span> {status}</h3>
+          <button id ={order_id} onClick= {this.handleUpdate} value="NEW">RESET</button>
+          <button id ={order_id} onClick= {this.handleUpdate} value="IN PROGRESS">START</button>
+          <button id ={order_id} onClick = {this.handleUpdate} value="READY">READY</button>
+          <button id ={order_id} onClick = {this.handleUpdate} value="COMPLETE">COMPLETE</button>
+        </div>
       </div>
     )
   }

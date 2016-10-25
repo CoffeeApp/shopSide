@@ -1,3 +1,492 @@
-/*main {
+#counterButtonsPlus, #counterButtonsMinus {
+  display: inline-block;
+}
+.item, .itemdetails, .cartitems, .cartitem, .cartfooter, .iteminput, .itemform, .button, .module {box-sizing: border-box;}
+.link {text-decoration: none; color: #333333;}
+
+a:hover {
+  color: #3f0000;
+  cursor: pointer;
+}
+
+/*********************************/
+/* PASTE CUSTOM ABOVE ONLY       */
+/* ONLY PASTE WEBFLOW CSS BELOW  */
+/*********************************/
+body {
+  margin: 0px;
+  font-family: 'Open Sans', sans-serif;
+  color: #333;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+ul {
+  list-style: none;
+  margin-top: -10px;
+  margin-left: -5px;
+}
+
+#coffeeRow,
+#businessDetails {
+  border-bottom: 5px solid #3f0000;
+}
+
+#coffeeRow {
+  padding-bottom: 20px;
+}
+
+#businessDetails {
+  padding: 20px;
+}
+
+#businessAddress {
+  text-align: right;
+  padding: 0;
+  margin-right: 20px;
+  line-height: 0.2;
+}
+
+.fontColor {
+  color: #800000;
+}
+
+.coffeeSpecs {
+  font-size: 16px;
+  font-weight: bolder;
+}
+
+.cartitems {
+  position: fixed;
+  top: 108px;
+  right: 0px;
+  bottom: 249px;
+  z-index: 1000;
+  display: block;
+  overflow: scroll;
+  width: 300px;
+  float: right;
+  border-left: 1px solid #ddd;
+  background-color: #fff;
+  box-shadow: -3px 0 2px 0 rgba(0, 0, 0, .1);
+}
+
+.cartfooter {
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+  z-index: 1000;
+  width: 300px;
+  height: 250px;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  background-color: #fff;
+  box-shadow: -3px 0 1px 0 rgba(0, 0, 0, .1);
+}
+
+.button {
+  display: inline-block;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  background-color: #3f0000;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
   text-align: center;
-}*/
+  cursor: pointer;
+}
+
+.button.yes {
+  position: relative;
+  z-index: 4000;
+}
+
+.button.no {
+  position: relative;
+  z-index: 4000;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.item {
+  position: relative;
+  overflow: auto;
+  width: 100vw;
+  padding: 0 20px;
+  cursor: pointer;
+}
+
+.contact {
+  position: relative;
+  overflow: auto;
+  width: 100vw;
+  padding: 20px;
+  cursor: pointer;
+}
+
+
+.coffeeItem {
+  overflow: auto;
+  padding: 20px;
+  border-top: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.businessLogo {
+  width: 80px;
+  height: 80px;
+  margin: 10px 10px 0 0;
+  float: left;
+  border-radius: 5px;
+}
+
+.itemtitle {
+  color: #333;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.itemoverview {
+  overflow: auto;
+  color: #333;
+  text-decoration: none;
+}
+
+.itemprice {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  float: right;
+  color: #a00;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 600;
+}
+
+.itemquantity {
+  height: 25px;
+  margin: 10px;
+  padding-top: 2px;
+  padding-bottom: 5px;
+  float: left;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.navbar {
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+  background-color: #3f0000;
+}
+
+.searchbar {
+  display: block;
+  height: 50px;
+  margin: 10px 250px 20px;
+  padding: 8px 12px;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(243, 230, 255, .5);
+  border-radius: 3px;
+  background-color: hsla(0, 0%, 100%, .3);
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+  font-size: 15px;
+  line-height: 15px;
+  font-weight: 300;
+}
+
+.dashboard {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  height: auto;
+  margin-top: 108px;
+}
+
+.logo {
+  display: block;
+  width: 200px;
+  margin-top: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+  font-size: 18px;
+  text-align: center;
+}
+
+.row {
+  clear: both;
+}
+
+.itemdescription {
+  margin-top: 3px;
+  border-radius: 3px;
+  color: #666;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 300;
+}
+
+.itemform {
+  overflow: auto;
+  width: 100%;
+}
+
+.itemdetails {
+  position: relative;
+  margin-left: 70px;
+  color: #333;
+}
+
+.selectcafe {
+  display: block;
+}
+
+.iteminput {
+  position: relative;
+  width: 100%;
+  height: 30px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-right: 12px;
+  padding-left: 12px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  color: #888;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.quantity {
+  width: 25px;
+  height: 25px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.success {
+  background-color: transparent;
+}
+
+.module {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 3000;
+  width: 300px;
+  margin-top: -120px;
+  margin-left: -150px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, .2);
+}
+
+.notificationtitle {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.notificationtext {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.notification {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 2000;
+  display: block;
+  background-color: rgba(0, 0, 0, .7);
+}
+
+.confirm {
+  display: block;
+}
+
+.showorderstatus {
+  display: block;
+}
+
+.contactDetails {
+  width: 60%;
+  float: left;
+}
+
+.coffeeOrders {
+  width: 40%px;
+  height: 100px;
+  margin-right: 40px;
+  float: left;
+}
+
+.orderStatus {
+  width: 40%px;
+  height: 100px;
+  margin-right: 50px;
+  float: right;
+}
+
+.notificationstatus {
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.searchbarcontainer {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.cartitem {
+  display: block;
+  overflow: auto;
+  width: 100%;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+}
+
+.removeitem {
+  margin-left: 1em;
+  color: #d3d3d3;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.cart {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  overflow: auto;
+  background-color: #fff;
+}
+
+.iteminfo {
+  color: #333;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+}
+
+.distance {
+  color: #a00;
+}
+
+.menuimage {
+  width: 30px;
+  height: 30px;
+  margin: 15px 20px;
+  cursor: pointer;
+}
+
+.menuright {
+  width: 30px;
+  height: 30px;
+  margin-top: 10px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 767px) {
+  .cartitems {
+    top: 95px;
+    width: 100%;
+  }
+  .cartfooter {
+    width: 100%;
+  }
+  .item {
+    padding: 10px;
+  }
+  .itemtitle {
+    font-size: 18px;
+  }
+  .itemprice {
+    top: 12px;
+    right: 12px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .searchbar {
+    width: 60%;
+    height: 17px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    font-size: 12px;
+  }
+  .dashboard {
+    margin-top: 95px;
+  }
+  .itemdescription {
+    color: #aaa;
+    font-size: 12px;
+    line-height: 13px;
+    font-weight: 300;
+  }
+  .itemform {
+    display: block;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .searchbarcontainer {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  .menuimage {
+    width: 30px;
+    height: 30px;
+    margin: 13px 10px 10px;
+  }
+  .menuright {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+}
+
+@media (max-width: 479px) {
+  .module {
+    display: block;
+    width: 250px;
+    margin-top: -180px;
+    margin-right: auto;
+    margin-left: -125px;
+  }
+  .cart {
+    display: block;
+  }
+}

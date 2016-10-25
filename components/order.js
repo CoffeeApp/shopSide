@@ -30,7 +30,9 @@ class Order extends Component {
     return (
       <div>
         <OrderStatus { ...this.props }/>
-        {this.renderCoffees(coffees)}
+        <div className="item" id="coffeeRow">
+          {this.renderCoffees(coffees)}
+        </div>
       </div>
     )
   }
