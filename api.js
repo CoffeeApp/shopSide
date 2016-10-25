@@ -2,7 +2,7 @@ const feathers = require('feathers-client')
 const io = require('socket.io-client')
 
 // run off localhost:3030???
-const socket = io('http://192.168.1.84:3030/' || 'https://coffee-cloud.herokuapp.com/')
+const socket = io('http://192.168.1.8:3030/' || 'https://coffee-cloud.herokuapp.com/')
 
 
 

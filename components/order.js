@@ -3,13 +3,6 @@ import OrderStatus from './orderStatus'
 import Coffee from './coffee'
 import { map } from 'lodash'
 
-const coffeeStyle = {
-  background: '#3f0000',
-  color:'#ecf0f1',
-  padding:'50px',
-  paddingLeft:'40px'
-}
-
 class Order extends Component {
   constructor(props) {
     super(props)
@@ -26,6 +19,7 @@ class Order extends Component {
   }
 
   render () {
+    console.log("NEW PROPS", this.props)
     const { coffees } = this.props
     return (
       <div>
