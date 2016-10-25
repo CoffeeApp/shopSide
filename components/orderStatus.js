@@ -15,7 +15,7 @@ class OrderStatus extends Component {
     const { name, phone, comment, ordered, ready_time, order_id, status } = this.props
     return (
       <div>
-        <h2>Name: {name}</h2>
+        <h2 id>Name: {name}</h2>
         <h2>Phone: {phone}</h2>
         <h2>Notes: {comment}</h2>
         <h4>Ordered: {moment(ordered).format('h:mm a')}</h4>

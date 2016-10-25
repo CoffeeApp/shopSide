@@ -22,9 +22,15 @@ module.exports = function () {
     browser.submitForm(`#${formName}`)
   })
 
-  this.Then('I can see the cafe name "$string"', function (name, callback) {
-    var cafeNameExists = browser.waitForExist(`h1=${name}`)
+  this.Then('I can see the element with the id "$string"', function (name, callback) {
+    var cafeNameExists = browser.waitForExist(`#${name}`, 5000)
     assert.equal(cafeNameExists, true, callback)
+  })
+
+  this.Then('I can see that the element with the id "$string" is not "$string"', function (element, emptyValue, callback) {
+    var elementExists = browser.waitForExist(`#${element}`, 5000)
+    const text = browser.getText(`#${element}`)
+    assert.notEqual(text, emptyValue, callback)
   })
 
   this.Then('I can see status change to "$string"', function (name, callback) {
@@ -37,22 +43,5 @@ module.exports = function () {
     assert.equal(inputItemExists, true, callback)
   })
 
-  this.Then('I can see the list item "$string"', function (text, callback) {
-    var listItemExists = browser.waitForExist(`li=${text}`)
-    assert.equal(listItemExists, true, callback)
-    })
 
 }
-
-  //
-  // this.Then('I am redirected to "$string"', function (pathname, callback) {
-  //   browser.waitForExist('body')
-  //   var url = browser.getUrl()
-  //   assert.equal(Url.parse(url).pathname, pathname, callback)
-  // })
-  //
-  // this.Then('I am redirected to the "$string" page', function (pathname, callback) {
-  //   browser.waitForExist('body')
-  //   var url = browser.getUrl()
-  //   assert.equal(Url.parse(url).pathname, pathname, callback)
-  // })

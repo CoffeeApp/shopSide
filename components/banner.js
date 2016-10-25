@@ -18,8 +18,8 @@ class Banner extends Component {
     const {ordersById, number, shops, currentShop} = this.props
     return (
       <div>
-        <img style={{maxHeight: 200}} src={shops[currentShop].image}/>
-        <h1>{shops[currentShop].name}</h1>
+        <img id="shopImageElem" style={{maxHeight: 200}} src={shops[currentShop].image}/>
+        <h1 id="currentShopNameElem">{shops[currentShop].name}</h1>
         <select id="great-names" onChange={this.handleChange}>
           {map(shops, (shop, i) => {
             return <option value={shop.id} key={i}>
@@ -27,7 +27,7 @@ class Banner extends Component {
             </option>
             })}
         </select>
-        <h2>Total orders: {Object.keys(ordersById).length}</h2>
+        <h2 id="totalOrdersElem">Total orders: {Object.keys(ordersById).length}</h2>
       </div>
     )
   }
