@@ -64,62 +64,27 @@ class App extends Component {
 
   render () {
     const {ordersById, shops, currentShop} = this.state
-    console.log('shops in app.js: ', shops);
+    console.log('orders by id: ', ordersById);
     if(ordersById) {
       return (
         <div className="container-fluid">
           <div className="row">
             <div className="col-xs-4 col-md-4">
-              <Banner  number={Object.keys(ordersById).length} changeUser={this.changeUser} shops={shops} currentShop={currentShop}/>
+              <Banner
+                number={Object.keys(ordersById).length} changeUser={this.changeUser}
+                shops={shops}
+                currentShop={currentShop}/>
             </div>
-              <div className="col-xs-2 col-md-2" style={{}}>
-              {map(ordersById, (order, id) => {
-                if(order.status == 'received')
-                return (
-                  <div key={id}>
-                    <h2>{order.name} {order.phone}</h2>
-                    <h4>{moment(order.ordered).format('MMMM Do YYYY, h:mm:ss a')}</h4>
-                    <Order order_id ={order.order_id} coffees ={order.coffees} status ={order.status} updateStatus ={this.updateStatus} />
-                  </div>
+            <div className="col-xs-8 col-md-8">
+              <select>SomeShit</select>
+                {
+                  map(ordersById, (order, id) => {
+                    return (
+                      <Order {...order} updateStatus ={this.updateStatus} />
                     )
-                  })}
+                  })
+                }
                </div>
-               <div className="col-xs-2 col-md-2" style={{}}>
-               {map(ordersById, (order, id) => {
-                 if(order.status == 'started')
-                 return (
-                   <div key={id}>
-                     <h2>{order.name} {order.phone}</h2>
-                     <h4>{moment(order.ordered).format('MMMM Do YYYY, h:mm:ss a')}</h4>
-                     <Order order_id ={order.order_id} coffees ={order.coffees} status ={order.status} updateStatus ={this.updateStatus} />
-                   </div>
-                     )
-                   })}
-                </div>
-               <div className="col-xs-2 col-md-2" style={{}}>
-               {map(ordersById, (order, id) => {
-                 if(order.status == 'ready for collection')
-                 return (
-                   <div key={id}>
-                     <h2>{order.name} {order.phone}</h2>
-                     <h4>{moment(order.ordered).format('MMMM Do YYYY, h:mm:ss a')}</h4>
-                     <Order order_id ={order.order_id} coffees ={order.coffees} status ={order.status} updateStatus ={this.updateStatus} />
-                   </div>
-                     )
-                   })}
-                </div>
-                <div className="col-xs-2 col-md-2" style={{}}>
-                {map(ordersById, (order, id) => {
-                  if(order.status == 'complete')
-                  return (
-                    <div key={id}>
-                      <h2>{order.name} {order.phone}</h2>
-                      <h4>{moment(order.ordered).format('MMMM Do YYYY, h:mm:ss a')}</h4>
-                      <Order order_id ={order.order_id} coffees ={order.coffees} status ={order.status} updateStatus ={this.updateStatus} />
-                    </div>
-                      )
-                    })}
-                 </div>
           </div>
         </div>
       )
