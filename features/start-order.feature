@@ -6,5 +6,5 @@ Feature: Test start button
   Scenario: I want to see my current coffee orders
     Given I am viewing the page at "/"
     And I can see that the element with the id "currentShopNameElem" is not ""
-    When I click on the button with value "IN PROGRESS"
-    Then I can see status change to "IN PROGRESS"
+    When I click on the button with value "BEING PROCESSED"
+    Then I can see status change to "BEING PROCESSED"
