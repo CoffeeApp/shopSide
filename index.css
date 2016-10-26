@@ -1,3 +1,196 @@
-/*main {
+#counterButtonsPlus, #counterButtonsMinus {
+  display: inline-block;
+}
+.item, .itemdetails, .cartitems, .cartitem, .cartfooter, .iteminput, .itemform, .button, .module {box-sizing: border-box;}
+.link {text-decoration: none; color: #333333;}
+
+a:hover {
+  color: #3f0000;
+  cursor: pointer;
+}
+
+/*********************************
+ Main Styles
+*********************************/
+body {
+  margin: 0px;
+  font-family: 'Open Sans', sans-serif;
+  color: #333;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+ul {
+  list-style: none;
+  margin-top: -10px;
+  margin-left: -5px;
+}
+
+.item {
+  position: relative;
+  overflow: auto;
+  width: 100vw;
+  padding: 0 20px;
+  cursor: pointer;
+}
+
+.row {
+  clear: both;
+}
+
+/*********************************
+ Main Banner
+*********************************/
+
+.banner {
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+  background-color: #3f0000;
+}
+
+.logo {
+  display: block;
+  width: 200px;
+  margin-top: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+  font-size: 18px;
   text-align: center;
-}*/
+}
+
+.searchbarcontainer {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.searchbar {
+  display: block;
+  height: 50px;
+  margin: 10px 250px 20px;
+  padding: 8px 12px;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(243, 230, 255, .5);
+  border-radius: 3px;
+  background-color: hsla(0, 0%, 100%, .3);
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+  font-size: 15px;
+  line-height: 15px;
+  font-weight: 300;
+}
+
+/*********************************
+ Business Details
+*********************************/
+
+#businessDetails {
+  padding: 20px;
+}
+
+#businessDetails,
+#coffeeRow {
+  border-bottom: 5px solid #3f0000;
+}
+
+#businessAddress {
+  text-align: right;
+  padding: 0;
+  margin-right: 20px;
+  line-height: 0.2;
+}
+
+.redColor {
+  color: red;
+}
+
+.businessLogo {
+  width: 80px;
+  height: 80px;
+  margin: 10px 10px 0 0;
+  float: left;
+  border-radius: 5px;
+}
+.contactDetails {
+  width: 60%;
+  float: left;
+}
+
+/*********************************
+ Coffee order dashboard
+*********************************/
+
+.dashboard {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  height: auto;
+  margin-top: 108px;
+}
+
+#coffeeRow {
+  padding-bottom: 20px;
+}
+
+.fontColor {
+  color: #800000;
+}
+
+.coffeeSpecs {
+  font-size: 16px;
+  font-weight: bolder;
+}
+
+.coffeeOrders {
+  width: 40%px;
+  height: 100px;
+  margin-right: 40px;
+  float: left;
+}
+
+.orderStatus {
+  width: 40%px;
+  height: 100px;
+  margin-right: 50px;
+  float: right;
+}
+
+/*********************************
+ Media queries
+*********************************/
+
+@media (max-width: 767px) {
+  .item {
+    padding: 10px;
+  }
+  .searchbar {
+    width: 60%;
+    height: 17px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    font-size: 12px;
+  }
+  .dashboard {
+    margin-top: 95px;
+  }
+  .searchbarcontainer {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+}

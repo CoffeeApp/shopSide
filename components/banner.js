@@ -17,17 +17,21 @@ class Banner extends Component {
   render () {
     const {ordersById, number, shops, currentShop} = this.props
     return (
-      <div>
-        <img id="shopImageElem" style={{maxHeight: 200}} src={shops[currentShop].image}/>
-        <h1 id="currentShopNameElem">{shops[currentShop].name}</h1>
-        <select id="great-names" onChange={this.handleChange}>
-          {map(shops, (shop, i) => {
-            return <option value={shop.id} key={i}>
-              {shop.name}
-            </option>
-            })}
-        </select>
-        <h2 id="totalOrdersElem">Total orders: {Object.keys(ordersById).length}</h2>
+      <div className="banner">
+        <div className="row">
+          <span className="logo">Caffeinati</span>
+        </div>
+        <div className="row">
+          <div className="searchbarcontainer">
+            <select className="searchbar" onChange={this.handleChange}>
+              {map(shops, (shop, i) => {
+                return <option value={shop.id} key={i}>
+                  {shop.name}
+                </option>
+                })}
+            </select>
+          </div>
+        </div>
       </div>
     )
   }
@@ -35,3 +39,10 @@ class Banner extends Component {
 }
 
 export default Banner
+
+// <div className="row">
+//   <div className="searchbarcontainer">
+// <img style={{maxHeight: 200}} src={shops[currentShop].image}/>
+// <h1>{shops[currentShop].name}</h1>
+//
+// <h2>Total orders: {Object.keys(ordersById).length}</h2>

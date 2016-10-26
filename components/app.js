@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Banner from './banner'
 import Order from './order'
+import BusinessDetails from './businessDetails'
 import { orderService, shopService } from '../api'
 import { map } from 'lodash'
 
@@ -65,9 +66,7 @@ class App extends Component {
   renderOrders(ordersById) {
     return map(ordersById, (order, i) => {
       return (
-        <div key={i}>
-          <Order {...order} updateStatus = {this.updateStatus} />
-        </div>
+          <Order key={i} {...order} updateStatus = {this.updateStatus} />
       )
     })
   }
@@ -78,7 +77,10 @@ class App extends Component {
       return (
         <div>
           <Banner {...this.state} changeUser={this.changeUser}/>
-          {this.renderOrders(ordersById)}
+          <div className="dashboard">
+            <BusinessDetails {...this.state}/>
+            {this.renderOrders(ordersById)}
+          </div>
         </div>
       )
     } else {
