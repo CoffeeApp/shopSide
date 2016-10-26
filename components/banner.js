@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { banner, image, currentOrders, text } from '../styles/bannerStyle'
 import { map } from 'lodash'
 import moment from 'moment'
+import Logo from './logo'
 
 class Banner extends Component {
 
@@ -19,7 +20,9 @@ class Banner extends Component {
     return (
       <div className="banner">
         <div className="row">
-          <span className="logo">Caffeinati</span>
+          <span className="logo">
+            <Logo />          
+          </span>
         </div>
         <div className="row">
           <div className="searchbarcontainer">
