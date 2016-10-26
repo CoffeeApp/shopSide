@@ -2,6 +2,6 @@ module.exports = {
   proxy: {
     protocol: 'http',
     hostname: 'localhost',
-    port: 9966 // 3030 ?
+    port: 9967 // 3030 ?
   }
 }
