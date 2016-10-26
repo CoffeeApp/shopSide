@@ -19,7 +19,6 @@ class Order extends Component {
   }
 
   render () {
-    console.log("NEW PROPS", this.props)
     const { coffees } = this.props
     return (
       <div>

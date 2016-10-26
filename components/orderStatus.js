@@ -13,7 +13,6 @@ class OrderStatus extends Component {
 
   render() {
     const { name, phone, comment, ordered, order_id, status, ready_time } = this.props
-    console.log(comment)
     return (
       <div className="item">
         <div className="contactDetails">
