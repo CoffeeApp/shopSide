@@ -24,7 +24,7 @@ class OrderStatus extends Component {
           <h3><span className="fontColor">Pick up:</span> {ready_time}</h3>
           <h3><span className="fontColor">Order status:</span> <span>{status}</span></h3>
           <button className="button" id={order_id} onClick={this.handleUpdate} value="NEW">RESET</button>
-          <button className="button" id={order_id} onClick={this.handleUpdate} value="IN PROGRESS">START</button>
+          <button className="button" id={order_id} onClick={this.handleUpdate} value="BEING PROCESSED">START</button>
           <button className="button" id={order_id} onClick={this.handleUpdate} value="READY">READY</button>
           <button className="button" id={order_id} onClick={this.handleUpdate} value="COMPLETE">COMPLETE</button>
         </div>
