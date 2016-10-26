@@ -12,12 +12,14 @@ class OrderStatus extends Component {
   }
 
   render() {
-    const { name, phone, ordered, order_id, status, ready_time } = this.props
+    const { name, phone, comment, ordered, order_id, status, ready_time } = this.props
+    console.log(comment)
     return (
       <div className="item">
         <div className="contactDetails">
           <h2><span className="fontColor">Name:</span> {name}</h2>
           <h2><span className="fontColor">Telephone:</span> {phone}</h2>
+          <h3><span className="fontColor">Comments:</span> {comment}</h3>
           <h4><span className="fontColor">Ordered:</span> {moment(ordered).format('h:mm a, MMMM Do YYYY')}</h4>
         </div>
         <div className="orderStatus">
