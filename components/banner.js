@@ -17,7 +17,7 @@ class Banner extends Component {
   render () {
     const {ordersById, number, shops, currentShop} = this.props
     return (
-      <div className="navbar">
+      <div className="banner">
         <div className="row">
           <span className="logo">Caffeinati</span>
         </div>

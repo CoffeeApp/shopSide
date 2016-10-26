@@ -8,7 +8,7 @@ function BusinessDetails (props) {
       <div className="contactDetails">
         <img className="businessLogo" src={shops[currentShop].image}/>
         <h1>{shops[currentShop].name}</h1>
-        <h2>{Object.keys(ordersById).length} coffee orders pending</h2>
+        <h2><span id="redColor">{Object.keys(ordersById).length}</span> coffee orders pending</h2>
       </div>
        <div className="orderStatus" id="businessAddress">
         <h4>{shops[currentShop].name}</h4>
