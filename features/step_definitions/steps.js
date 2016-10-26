@@ -34,12 +34,12 @@ module.exports = function () {
   })
 
   this.Then('I can see status change to "$string"', function (name, callback) {
-    var statusNameExists = browser.waitForExist(`span=${name}`)
+    var statusNameExists = browser.waitForExist(`span=${name}`, 5000)
     assert.equal(statusNameExists, true, callback)
   })
 
   this.Then('I can see the "$string" item "$string"', function (element, value, callback) {
-    var inputItemExists = browser.waitForExist(`${element}[text=${value}]`)
+    var inputItemExists = browser.waitForExist(`${element}[text=${value}]`, 5000)
     assert.equal(inputItemExists, true, callback)
   })
 
