@@ -22,9 +22,12 @@ npm start
 browse to <http://localhost:9966/>.
 
 ## test
+Running Tests:
+prerequisite:
+Please have local server running at <http://localhost:9967/> and send a coffee order through to first shop
 
 ```
-npm test
+npm run dev-test
 ```
 
 ## deploy
@@ -32,8 +35,3 @@ npm test
 ```
 npm run deploy
 ```
-Running Tests:
-prerequisite:
-please have local server running at <http://localhost:9967/> and send a coffee order through to first shop
-command: 
-npm run dev-test
