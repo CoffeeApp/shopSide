@@ -31,11 +31,25 @@ ul {
   overflow: auto;
   width: 100vw;
   padding: 0 20px;
-  cursor: pointer;
 }
 
 .row {
   clear: both;
+}
+
+.button {
+  display: inline-block;
+  margin-top: -30px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  background-color: #3f0000;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
 }
 
 /*********************************
@@ -125,7 +139,7 @@ ul {
   border-radius: 5px;
 }
 .contactDetails {
-  width: 60%;
+  width: 40%;
   float: left;
 }
 
@@ -164,7 +178,7 @@ ul {
 }
 
 .orderStatus {
-  width: 40%px;
+  width: 30%px;
   height: 100px;
   margin-right: 50px;
   float: right;
@@ -177,14 +191,6 @@ ul {
 @media (max-width: 767px) {
   .item {
     padding: 10px;
-  }
-  .searchbar {
-    width: 60%;
-    height: 17px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    margin-left: 10px;
-    font-size: 12px;
   }
   .dashboard {
     margin-top: 95px;

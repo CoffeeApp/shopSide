@@ -18,7 +18,7 @@ class App extends Component {
   }
   refreshOrders() {
     var {currentShop} = this.state
-    orderService.find({query: {notIn: 'new', shop_id: currentShop}}).then(orders => {
+    orderService.find({query: {notIn: ['new', 'COMPLETE'], shop_id: currentShop}}).then(orders => {
       var ordersById = orders.reduce((result, order) => {
         result[order.order_id] = order
         return result
@@ -55,10 +55,14 @@ class App extends Component {
   }
 
   updateStatus(id, status) {
-    let temp = this.state.ordersById
-    temp[id].status = status
+    let ordersById = this.state.ordersById
+    if (status === "COMPLETE") {
+      delete ordersById[id]
+    } else {
+      ordersById[id].status = status
+    }
     this.setState({
-      ordersById: temp
+      ordersById
     })
     orderService.patch(id, {status: status})
   }
